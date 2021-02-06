@@ -22,13 +22,17 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/PlatformBrain.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/MainController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlatformBrain.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Cameras/FollowCamera.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Platform/Element.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Platform/PlatformElement.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Platform/Platform.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Platform/PlatformBrain.cs" />
         <option value="$PROJECT_DIR$/Assets/Shaders/Grid.shader" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Platform/PlatformElement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Cameras/FollowCamera.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Interactable/ObstaclePart.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Interactable/Obstacle.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Interactable/IInteractable.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Platform/Element.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Platform/PlatformMain.cs" />
       </list>
     </option>
   </component>
@@ -74,7 +78,7 @@
       <updated>1605954939112</updated>
       <workItem from="1605954979553" duration="7784000" />
       <workItem from="1605970737991" duration="599000" />
-      <workItem from="1612570772125" duration="7848000" />
+      <workItem from="1612570772125" duration="20770000" />
     </task>
     <servers />
   </component>
@@ -91,5 +95,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="590" y="204" width="998" height="708" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1605955715450" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1612581032917">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1612581032917" />
   </component>
 </project>

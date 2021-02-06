@@ -5,8 +5,10 @@ namespace Cameras
 {
     public class FollowCamera : MonoBehaviour
     {
+        [Header("Follow Settings")]
         [SerializeField] private Transform target;
         [SerializeField] [Range(0, 10)] private float speed = 1f;
+        [SerializeField] private float yOffset;
         [SerializeField] private bool ignoreX = true;
 
         private bool TargetExists => target != null;
@@ -18,6 +20,7 @@ namespace Cameras
 
             var pos = transform.position;
             var targetPosition = target.position;
+            targetPosition.y += yOffset;
             var distance = Vector2.Distance(pos, targetPosition) * speed;
             
             targetPosition.x = ignoreX ? pos.x : targetPosition.x;

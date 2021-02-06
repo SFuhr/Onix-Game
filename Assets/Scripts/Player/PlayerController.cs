@@ -7,10 +7,10 @@ namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
-        private static Action<PlatformBrain> _setPlatform;
-        public static void OnSetPlatform(PlatformBrain platform) => _setPlatform?.Invoke(platform);
+        private static Action<PlatformMain> _setPlatform;
+        public static void OnSetPlatform(PlatformMain platform) => _setPlatform?.Invoke(platform);
         
-        private PlatformBrain _platform;
+        private PlatformMain _platform;
 
         private bool PlatformExists => _platform != null;
 
@@ -38,10 +38,10 @@ namespace Player
 
             if (Input.GetMouseButtonUp(0))
             {
-                _platform.Run();
+                _platform.Run(true);
             }
             var axis = Input.GetAxis("Mouse X");
-            _platform.SetMouseXAxis(axis);
+            _platform.SetXAxis(axis);
         }
     }
 }

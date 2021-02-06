@@ -10,11 +10,12 @@
           <e p="Cameras" t="Include">
             <e p="FollowCamera.cs" t="Include" />
           </e>
+          <e p="Interactable" t="Include">
+            <e p="IInteractable.cs" t="Include" />
+          </e>
           <e p="Platform" t="Include">
             <e p="Element.cs" t="Include" />
-            <e p="Platform.cs" t="Include" />
-            <e p="PlatformBrain.cs" t="Include" />
-            <e p="PlatformElement.cs" t="Include" />
+            <e p="PlatformMain.cs" t="Include" />
           </e>
           <e p="Player" t="Include">
             <e p="PlayerController.cs" t="Include" />
