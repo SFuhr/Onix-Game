@@ -31,8 +31,8 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Interactable/ObstaclePart.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Interactable/Obstacle.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Interactable/IInteractable.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Platform/Element.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Platform/PlatformMain.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Platform/Element.cs" />
       </list>
     </option>
   </component>
@@ -78,7 +78,7 @@
       <updated>1605954939112</updated>
       <workItem from="1605954979553" duration="7784000" />
       <workItem from="1605970737991" duration="599000" />
-      <workItem from="1612570772125" duration="20770000" />
+      <workItem from="1612570772125" duration="22557000" />
     </task>
     <servers />
   </component>

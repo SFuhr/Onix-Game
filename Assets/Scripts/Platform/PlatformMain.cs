@@ -9,7 +9,7 @@ namespace Platform
     public class PlatformMain : MonoBehaviour
     {
         [Header("Settings")]
-        [SerializeField] private float maxXOffset = 5f;
+        [SerializeField] private float xBorder = 5f;
         [SerializeField] private float speed = 10f;
         [SerializeField] private float lowestPoint = -95f;
         [Header("Elements")]
@@ -17,6 +17,8 @@ namespace Platform
         [SerializeField] private LayerMask scanLayer;
         [SerializeField] [Range(0,1)] private float scanTolerance = 0.9f;
         [SerializeField] private float growthSpeed = 2f;
+
+        public static float XBorderSize { get; private set; }
         
         private bool _isRunning;
         private float _xAxis;
@@ -26,6 +28,7 @@ namespace Platform
         
         private void Start()
         {
+            XBorderSize = xBorder;
             _scanResults = new Collider2D[10];
             var element = Instantiate(elementPrefab, transform.position, Quaternion.identity,transform);
             element.SetOwnerPlatform(this);
@@ -47,7 +50,7 @@ namespace Platform
             if(!_isRunning) return;
             
             var pos = transform.position;
-            pos.x = Mathf.Clamp(pos.x + _xAxis, -maxXOffset,maxXOffset);
+            pos.x = Mathf.Clamp(pos.x + _xAxis, -xBorder,xBorder);
             pos.y -= Time.deltaTime * speed;
 
             transform.position = pos;
@@ -76,7 +79,7 @@ namespace Platform
                     if (!col.isTrigger)
                     {
                         // separate element here
-                        var elemBounds = elem.GetBounds;
+                        var elemBounds = elem.GetBounds();
                         var colBounds = col.bounds;
                         
                         if (elemBounds.min.x < colBounds.min.x)
