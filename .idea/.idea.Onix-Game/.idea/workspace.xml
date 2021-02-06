@@ -7,6 +7,9 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -16,6 +19,16 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/SimpleCameraController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Level/GenerateLevel.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Level/MainGrid.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlatformBrain.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Player/MainController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlatformBrain.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Cameras/FollowCamera.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Platform/Element.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Platform/PlatformElement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Platform/Platform.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Platform/PlatformBrain.cs" />
+        <option value="$PROJECT_DIR$/Assets/Shaders/Grid.shader" />
       </list>
     </option>
   </component>
@@ -61,6 +74,7 @@
       <updated>1605954939112</updated>
       <workItem from="1605954979553" duration="7784000" />
       <workItem from="1605970737991" duration="599000" />
+      <workItem from="1612570772125" duration="7848000" />
     </task>
     <servers />
   </component>

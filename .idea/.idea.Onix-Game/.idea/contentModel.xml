@@ -7,10 +7,21 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
-          <e p="Level" t="Include">
-            <e p="MainGrid.cs" t="Include" />
+          <e p="Cameras" t="Include">
+            <e p="FollowCamera.cs" t="Include" />
           </e>
-          <e p="SimpleCameraController.cs" t="Include" />
+          <e p="Platform" t="Include">
+            <e p="Element.cs" t="Include" />
+            <e p="Platform.cs" t="Include" />
+            <e p="PlatformBrain.cs" t="Include" />
+            <e p="PlatformElement.cs" t="Include" />
+          </e>
+          <e p="Player" t="Include">
+            <e p="PlayerController.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Shaders" t="Include">
+          <e p="Grid.shader" t="Include" />
         </e>
         <e p="TODO.txt" t="Include" />
       </e>
