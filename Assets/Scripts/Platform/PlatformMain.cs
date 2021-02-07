@@ -9,9 +9,10 @@ namespace Platform
     public class PlatformMain : MonoBehaviour
     {
         [Header("Settings")]
-        [SerializeField] private float maxXOffset = 5f;
+        [SerializeField] private float xBorder = 5f;
         [SerializeField] private float speed = 10f;
         [SerializeField] private float lowestPoint = -95f;
+        // [SerializeField] [Range(1,60)] private int ticksPerSecond = 20;
         [Header("Elements")]
         [SerializeField] private Element elementPrefab;
         [SerializeField] private LayerMask scanLayer;
@@ -20,8 +21,10 @@ namespace Platform
         
         private bool _isRunning;
         private float _xAxis;
+        // private float _tickTimer;
         private List<Element> _elements;
         private List<Element> _newElements;
+        private List<Element> _removeElements;
         private Collider2D[] _scanResults;
         
         private void Start()
@@ -32,6 +35,7 @@ namespace Platform
             element.AdjustElement(1,growthSpeed);
             _elements = new List<Element>();
             _newElements = new List<Element>();
+            _removeElements = new List<Element>();
             _elements.Add(element);
             
             PlayerController.OnSetPlatform(this);
@@ -47,7 +51,7 @@ namespace Platform
             if(!_isRunning) return;
             
             var pos = transform.position;
-            pos.x = Mathf.Clamp(pos.x + _xAxis, -maxXOffset,maxXOffset);
+            pos.x = Mathf.Clamp(pos.x + _xAxis, -xBorder,xBorder);
             pos.y -= Time.deltaTime * speed;
 
             transform.position = pos;
@@ -62,6 +66,14 @@ namespace Platform
 
         private void UpdateElements()
         {
+            // if (_tickTimer > 0)
+            // {
+            //     _tickTimer -= Time.deltaTime;
+            //     return;
+            // }
+            //
+            // _tickTimer = 1 / (float)ticksPerSecond;
+            
             var size = _elements.Count;
             for (int i = 0; i < size; i++)
             {
@@ -88,16 +100,16 @@ namespace Platform
                             _newElements.Add(left);
                         }
 
-                        // if (elemBounds.max.x > colBounds.max.x)
-                        // {
-                        //     // create right part
-                        //     var midPoint = new Vector2((colBounds.max.x + elemBounds.max.x) * 0.5f,(colBounds.max.y + elemBounds.max.y) * 0.5f);
-                        //     var right = Instantiate(elementPrefab, midPoint, Quaternion.identity, transform);
-                        //     right.AdjustElement(Mathf.Abs(elemBounds.max.x - colBounds.max.x),growthSpeed);
-                        //     _newElements.Add(right);
-                        // }
-                        _elements.Remove(elem);
-                        Destroy(elem.gameObject);
+                        if (elemBounds.max.x > colBounds.max.x)
+                        {
+                            // create right part
+                            var midPoint = new Vector2((colBounds.max.x + elemBounds.max.x) * 0.5f,(colBounds.max.y + elemBounds.max.y) * 0.5f);
+                            var right = Instantiate(elementPrefab, midPoint, Quaternion.identity, transform);
+                            right.AdjustElement(Mathf.Abs(elemBounds.max.x - colBounds.max.x),growthSpeed);
+                            _newElements.Add(right);
+                        }
+                        
+                        _removeElements.Add(elem);
                         break;
                     }
                     if(col.TryGetComponent(out IInteractable interactable))
@@ -107,6 +119,16 @@ namespace Platform
                 }
             }
 
+            if (_removeElements.Count > 0)
+            {
+                for (int i = 0; i < _removeElements.Count; i++)
+                {
+                    _elements.Remove(_removeElements[i]);
+                    _removeElements[i].Deactivate();
+                }
+                _removeElements.Clear();
+            }
+            
             if (_newElements.Count > 0)
             {
                 _elements.AddRange(_newElements);

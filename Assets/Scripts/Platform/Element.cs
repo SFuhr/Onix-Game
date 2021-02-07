@@ -17,6 +17,12 @@ namespace Platform
             // Debug.Log($"{box.min}, {box.center}, {box.max}");
         }
 
+        public void Deactivate()
+        {
+            // gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+
         public void SetOwnerPlatform(PlatformMain platform)
         {
             _owner = platform;
