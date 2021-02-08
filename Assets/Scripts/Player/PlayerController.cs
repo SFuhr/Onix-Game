@@ -1,22 +1,21 @@
 ﻿using System;
-using Platform;
-using UnityEditor;
+using Grid;
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
-        private static Action<PlatformMain> _setPlatform;
-        public static void OnSetPlatform(PlatformMain platform) => _setPlatform?.Invoke(platform);
+        private static Action<Mover> _setMover;
+        public static void OnSetMover(Mover platform) => _setMover?.Invoke(platform);
         
-        private PlatformMain _platform;
+        private Mover _mover;
 
-        private bool PlatformExists => _platform != null;
+        private bool PlatformExists => _mover != null;
 
         private void Awake()
         {
-            _setPlatform += platform => _platform = platform;
+            _setMover += platform => _mover = platform;
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -38,10 +37,10 @@ namespace Player
 
             if (Input.GetMouseButtonUp(0))
             {
-                _platform.Run(true);
+                _mover.Activate();
             }
             var axis = Input.GetAxis("Mouse X");
-            _platform.SetXAxis(axis);
+            _mover.SetXAxis(axis);
         }
     }
 }

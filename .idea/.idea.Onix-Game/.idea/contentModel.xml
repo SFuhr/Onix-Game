@@ -8,7 +8,8 @@
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
           <e p="Grid" t="Include">
-            <e p="TextureGrid.cs" t="Include" />
+            <e p="MeshGrid.cs" t="Include" />
+            <e p="Mover.cs" t="Include" />
           </e>
           <e p="Interactable" t="Include">
             <e p="IInteractable.cs" t="Include" />
@@ -17,16 +18,9 @@
           <e p="Miscellaneous" t="Include">
             <e p="FollowCamera.cs" t="Include" />
           </e>
-          <e p="Platform" t="Include">
-            <e p="Element.cs" t="Include" />
-            <e p="PlatformMain.cs" t="Include" />
-          </e>
           <e p="Player" t="Include">
             <e p="PlayerController.cs" t="Include" />
           </e>
-        </e>
-        <e p="Shaders" t="Include">
-          <e p="Grid.shader" t="Include" />
         </e>
         <e p="TODO.txt" t="Include" />
       </e>
