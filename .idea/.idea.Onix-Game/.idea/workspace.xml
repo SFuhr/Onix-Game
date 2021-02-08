@@ -29,10 +29,13 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Cameras/FollowCamera.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Interactable/ObstaclePart.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Interactable/Obstacle.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Interactable/IInteractable.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Platform/Element.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Platform/PlatformMain.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Interactable/Obstacle.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Miscellaneous/FollowCamera.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/GridGenerator.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/TextureGrid.cs" />
       </list>
     </option>
   </component>
@@ -81,6 +84,8 @@
       <workItem from="1612570772125" duration="20770000" />
       <workItem from="1612598241439" duration="1306000" />
       <workItem from="1612670832144" duration="2714000" />
+      <workItem from="1612692547173" duration="1742000" />
+      <workItem from="1612760430581" duration="13789000" />
     </task>
     <servers />
   </component>

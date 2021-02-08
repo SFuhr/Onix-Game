@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Cameras
+namespace Miscellaneous
 {
     public class FollowCamera : MonoBehaviour
     {
