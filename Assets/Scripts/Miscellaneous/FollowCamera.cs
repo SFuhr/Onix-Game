@@ -19,11 +19,12 @@ namespace Miscellaneous
 
             var pos = transform.position;
             var targetPosition = target.position;
+            
             targetPosition.y += yOffset;
+            targetPosition.x = ignoreX ? pos.x : targetPosition.x;
+            
             var distance = Vector2.Distance(pos, targetPosition) * speed;
             
-            targetPosition.x = ignoreX ? pos.x : targetPosition.x;
-
             Vector3 newPos = Vector2.Lerp(pos, targetPosition,Time.deltaTime * distance);
             newPos.z = ZPos;
 

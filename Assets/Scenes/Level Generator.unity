@@ -134,7 +134,7 @@ PrefabInstance:
       objectReference: {fileID: 1619416264}
     - target: {fileID: 1155531980, guid: 7c224cda2668b3740b98624e3c834d5c, type: 3}
       propertyPath: yOffset
-      value: -4
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 3941611656896557760, guid: 7c224cda2668b3740b98624e3c834d5c,
         type: 3}
@@ -144,7 +144,7 @@ PrefabInstance:
     - target: {fileID: 3941611656896557761, guid: 7c224cda2668b3740b98624e3c834d5c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3941611656896557761, guid: 7c224cda2668b3740b98624e3c834d5c,
         type: 3}
@@ -305,8 +305,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc632e926334b769b82e956730de0aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moverSize: 16
-  spreadEachXLines: 32
+  moverStartSize: 60
+  moverFinalSize: 90
   moverHeight: 8
   colorEmpty: {r: 1, g: 1, b: 1, a: 1}
   colorFilled: {r: 0, g: 0, b: 0, a: 1}
@@ -356,7 +356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fallSpeed: 8
   xBorder: 5
-  lowestYPoint: -150
+  yBorder: 100
   grid: {fileID: 1550092560}
 --- !u!1001 &1720302189
 PrefabInstance:
@@ -373,7 +373,7 @@ PrefabInstance:
     - target: {fileID: 2578327786369385575, guid: e0f3d6dd60f4b2e4c9d553f5ea434a7e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2578327786369385575, guid: e0f3d6dd60f4b2e4c9d553f5ea434a7e,
         type: 3}

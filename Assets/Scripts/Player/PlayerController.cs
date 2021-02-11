@@ -8,6 +8,8 @@ namespace Player
     {
         private static Action<Mover> _setMover;
         public static void OnSetMover(Mover platform) => _setMover?.Invoke(platform);
+
+        [SerializeField] [Range(0,2)] private float mouseSpeed = 0.5f;
         
         private Mover _mover;
 
@@ -39,7 +41,7 @@ namespace Player
             {
                 _mover.Activate();
             }
-            var axis = Input.GetAxis("Mouse X");
+            var axis = Input.GetAxis("Mouse X") * mouseSpeed;
             _mover.SetXAxis(axis);
         }
     }
