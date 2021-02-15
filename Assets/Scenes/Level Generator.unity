@@ -134,7 +134,7 @@ PrefabInstance:
       objectReference: {fileID: 1619416264}
     - target: {fileID: 1155531980, guid: 7c224cda2668b3740b98624e3c834d5c, type: 3}
       propertyPath: yOffset
-      value: -3
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 3941611656896557760, guid: 7c224cda2668b3740b98624e3c834d5c,
         type: 3}
@@ -305,8 +305,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc632e926334b769b82e956730de0aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moverStartSize: 60
-  moverFinalSize: 90
+  moverStartSize: 10
+  moverFinalSize: 60
   moverHeight: 8
   colorEmpty: {r: 1, g: 1, b: 1, a: 1}
   colorFilled: {r: 0, g: 0, b: 0, a: 1}

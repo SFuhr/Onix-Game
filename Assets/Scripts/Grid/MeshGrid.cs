@@ -24,6 +24,7 @@ namespace Grid
 
         private int Width => _texture.width;
         private int Height => _texture.height;
+        private Color ColorEmpty => colorEmpty;
 
         private int[,] _grid;
         private Renderer _renderer;
@@ -35,6 +36,8 @@ namespace Grid
         private int _spreadReady;
         private int _moverFinalSize;
         private int _spreadEachXLines;
+
+        // private Color ColorEmpty => Color.Lerp(colorEmpty, colorEmpty * 0.5f, Random.Range(0f, 1f));
 
         private void OnEnable()
         {
@@ -60,20 +63,13 @@ namespace Grid
             _spreadEachXLines = Height / ((_moverFinalSize - startSize) / 2);
             _spreadReady = _spreadEachXLines;
 
-            _currentXPos = 0;
+            _currentXPos = Width / 2;
 
             _grid = new int[Width, Height];
-            for (int x = 0; x < Width; x++)
-            {
-                for (int y = 0; y < Height; y++)
-                {
-                    _grid[x, y] = 0;
-                }
-            }
 
             var startPoint = Width / 2 - startSize / 2 + 1;
 
-            for (int y = 0; y < moverHeight; y++)
+            for (int y = 0; y <= _currentLine; y++)
             {
                 var lineSize = startSize;
                 for (int x = 0; x < Width; x++)
@@ -87,48 +83,43 @@ namespace Grid
                 }
             }
             
-            for (int x = 0; x < Width; x++)
-            {
-                _grid[x, 200] = Random.Range(0f, 100f) > 50 ? 2 : 0;
-            }
-
             var index = 0;
             for (int y = 0; y < Height; y++)
             {
                 for (int x = 0; x < Width; x++)
                 {
-                    _colors[index] = _grid[x, y] == 0 ? colorEmpty : colorFilled;
+                    _colors[index] = _grid[x, y] == 0 ? ColorEmpty : colorFilled;
                     index++;
                 }
             }
 
-            
-
             _texture.SetPixels(_colors);
             _texture.Apply();
-        }
 
+        }
+        
         public void UpdatePixels(Vector2 moverPos, float maxMoverXPos)
         {
             var y = Mathf.Abs(Mathf.Round(Mathf.Min(1, moverPos.y * updateAccuracy)));
             var expectedLine = (int) (Height * (y / (updateAccuracy * 100)));
 
-            var x = (int) Mathf.Round((Width / 2 * moverPos.x) / maxMoverXPos);
+            var x = (int) Mathf.Round((Width / 2 * moverPos.x) / maxMoverXPos) + (Width / 2);
 
             // Debug.Log($"{maxMoverXPos}; {x}; {Width}");
 
             SetNewLines(expectedLine, x);
         }
 
-        private void SideMover(int xOffset)
+        private void SideMover(int newXPos)
         {
-            var difference = Mathf.Abs(_currentXPos) - Mathf.Abs(xOffset);
-            var y = _currentLine;
+            var difference = Mathf.Abs(Mathf.Abs(_currentXPos) - Mathf.Abs(newXPos));
+            var y = _currentLine-1;
+            
             for (int i = 0; i < difference; i++)
             {
-                for (int x = 0; x < Width; x++)
+                if (_currentXPos < newXPos) // move left 
                 {
-                    if (x + 1 < Width)
+                    for (int x = 1; x < Width - 1; x++)
                     {
                         if (_grid[x, y] == 0 && _grid[x + 1, y] == 1)
                         {
@@ -137,8 +128,26 @@ namespace Grid
                         }
                     }
                 }
+                else
+                {
+                    for (int x = Width - 1; x > 0; x--)
+                    {
+                        if (_grid[x, y] == 0 && _grid[x - 1, y] == 1)
+                        {
+                            _grid[x, y] = 1;
+                            _grid[x - 1, y] = 0;
+                        }
+                    }
+                }
             }
-            _currentXPos = xOffset;
+
+            for (int x = 0; x < Width; x++)
+            {
+                var colorIndex = y * Width + x;
+                _colors[colorIndex] = _grid[x, y] == 0 ? ColorEmpty : colorFilled;
+            }
+
+            _currentXPos = newXPos;
         }
 
         private void SetNewLines(int expectedLine, int xPosition)
@@ -163,16 +172,16 @@ namespace Grid
                         {
                             _grid[x, y] = 1;
                         }
-
-                        if (xPosition != _currentXPos) SideMover(xPosition);
                     }
-
                     // updating pixels
                     var colorIndex = y * Width + x;
-                    _colors[colorIndex] = _grid[x, y] == 0 ? colorEmpty : colorFilled;
+                    _colors[colorIndex] = _grid[x, y] == 0 ? ColorEmpty : colorFilled;
                 }
             }
-
+            
+            // changing a x position
+            if (_currentXPos != xPosition) SideMover(xPosition);
+            
             _texture.SetPixels(_colors);
             _texture.Apply();
         }
