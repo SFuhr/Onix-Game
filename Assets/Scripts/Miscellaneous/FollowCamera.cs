@@ -9,7 +9,8 @@ namespace Miscellaneous
         [SerializeField] [Range(0, 10)] private float speed = 1f;
         [SerializeField] private float yOffset;
         [SerializeField] private bool ignoreX = true;
-
+        [SerializeField] private float yLowestPoint = -100;
+        
         private bool TargetExists => target != null;
         private float ZPos => transform.position.z;
         
@@ -22,6 +23,7 @@ namespace Miscellaneous
             
             targetPosition.y += yOffset;
             targetPosition.x = ignoreX ? pos.x : targetPosition.x;
+            targetPosition.y = targetPosition.y < yLowestPoint ? yLowestPoint : targetPosition.y;
             
             var distance = Vector2.Distance(pos, targetPosition) * speed;
             

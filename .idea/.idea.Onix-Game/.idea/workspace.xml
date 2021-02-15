@@ -34,10 +34,17 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Grid/GridGenerator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Grid/TextureGrid.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Platform/PlatformMain.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Level/LevelLoader.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Miscellaneous/FollowCamera.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/Mover.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Grid/MeshGrid.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/Mover.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Level/LevelManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/IInteractable.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/IPickable.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/Obstacle.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/BasePickup.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/Heart.cs" />
       </list>
     </option>
   </component>
@@ -54,6 +61,14 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Build/OnixGame.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="D:\Unity Projects\Onix-Game\Build" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
@@ -97,7 +112,7 @@
       <workItem from="1613124454275" duration="2759000" />
       <workItem from="1613256506650" duration="461000" />
       <workItem from="1613302270539" duration="616000" />
-      <workItem from="1613382460569" duration="11770000" />
+      <workItem from="1613382460569" duration="24739000" />
     </task>
     <servers />
   </component>

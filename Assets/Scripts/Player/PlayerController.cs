@@ -1,24 +1,23 @@
 ﻿using System;
 using Grid;
+using Level;
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
-        private static Action<Mover> _setMover;
-        public static void OnSetMover(Mover platform) => _setMover?.Invoke(platform);
+        private static Action<LevelManager> _setLevelManager;
+        public static void OnSetLevelManager(LevelManager manager) => _setLevelManager?.Invoke(manager);
 
-        [SerializeField] [Range(0,2)] private float mouseSpeed = 0.5f;
+        [SerializeField] [Range(0,2)] private float mouseSpeedMultiplier = 0.5f;
+
+        private LevelManager _levelManager;
         
-        private Mover _mover;
-
-        private bool PlatformExists => _mover != null;
-
         private void Awake()
         {
-            _setMover += platform => _mover = platform;
-
+            _setLevelManager += manager => { _levelManager = manager;};
+            
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
@@ -35,14 +34,12 @@ namespace Player
                 // #endif
             }
             
-            if (!PlatformExists) return;
-
             if (Input.GetMouseButtonUp(0))
             {
-                _mover.Activate();
+                _levelManager.ActivateMover();
             }
-            var axis = Input.GetAxis("Mouse X") * mouseSpeed;
-            _mover.SetXAxis(axis);
+            var axis = Input.GetAxis("Mouse X") * mouseSpeedMultiplier;
+            _levelManager.SetMouseXAxis(axis);
         }
     }
 }

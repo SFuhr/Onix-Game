@@ -22,23 +22,6 @@ namespace Grid
         private void Start()
         {
             _defaultPosition = Position;
-            
-            PlayerController.OnSetMover(this);
-        }
-
-        private void OnGUI()
-        {
-            int w = Screen.width, h = Screen.height;
-
-            GUIStyle style = new GUIStyle();
-
-            Rect rect = new Rect(0, 0, w, h * 4 / 100);
-            style.alignment = TextAnchor.UpperLeft;
-            style.fontSize = h * 2 / 100;
-            style.normal.textColor = new Color(1f, 0f, 0f, 1f);
-
-            string text = $"Mover Position\nX: {Position.x.ToString("G")} Y: {Position.y.ToString("G")}";
-            GUI.Label(rect, text, style);
         }
 
         IEnumerator PerformMoving()
