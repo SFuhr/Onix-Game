@@ -12,6 +12,7 @@
             <e p="Mover.cs" t="Include" />
           </e>
           <e p="Level" t="Include">
+            <e p="Boot.cs" t="Include" />
             <e p="LevelManager.cs" t="Include" />
           </e>
           <e p="Miscellaneous" t="Include">

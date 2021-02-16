@@ -9,14 +9,16 @@ namespace Grid
 {
     public class MeshGrid : MonoBehaviour
     {
-        [Header("Tear")] [Tooltip("Percentage of texture's width")]
+        [Header("Tear")]
+        [Tooltip("Percentage of texture's width")]
         [SerializeField] [Range(1, 100)] private int tearStartSize = 10;
-
         [SerializeField] [Range(1, 100)] private int tearFinalSize = 50;
-
         [SerializeField] [Min(1)] private int tearStartHeight = 8;
-        
         [SerializeField] [Range(1, 1000)] private int updateAccuracy = 1000;
+
+        [Header("Obstacles")]
+        [SerializeField] [Range(0,100)] private float obstacleSpawnChance = 30f;
+        [SerializeField] private Texture2D[] obstacleTexture;
 
         private int Width => _texture.width;
         private int Height => _texture.height;
@@ -34,7 +36,7 @@ namespace Grid
         private int _currentLine;
         private int _currentXPos;
         private int _spreadReady;
-        private int _moverFinalSize;
+        private int _tearFinalSize;
         private int _spreadEachXLines;
         private bool _initialized;
         
@@ -71,23 +73,42 @@ namespace Grid
 
         private void GenerateCells()
         {
+            // deleting all cells
             WipeCells();
             
+            // calculating tear sizes and another very important calculations
             var startSize = (int) Mathf.Round(Width * (tearStartSize * 0.01f));
             if (startSize % 2 != 0) startSize++;
 
-            _moverFinalSize = (int) Mathf.Round(Width * (tearFinalSize * 0.01f));
-            if (_moverFinalSize % 2 != 0) _moverFinalSize++;
-            if (_moverFinalSize <= startSize) _moverFinalSize = startSize + 2;
-
+            _tearFinalSize = (int) Mathf.Round(Width * (tearFinalSize * 0.01f));
+            if (_tearFinalSize % 2 != 0) _tearFinalSize++;
+            if (_tearFinalSize <= startSize) _tearFinalSize = startSize + 2;
+            
             _currentLine = tearStartHeight;
 
-            _spreadEachXLines = Height / ((_moverFinalSize - startSize) / 2);
+            _spreadEachXLines = Height / ((_tearFinalSize - startSize) / 2);
             _spreadReady = _spreadEachXLines;
 
             _currentXPos = Width / 2;
 
+            // creating obstacles
+            var yGap = Height / (Width / 2);
+            var obstacleYSpawn = yGap;
 
+            while (_currentLine > obstacleYSpawn)
+            {
+                obstacleYSpawn += yGap;
+            }
+            while (obstacleYSpawn < Height)
+            {
+                if (Random.Range(0, 100) < obstacleSpawnChance)
+                {
+                    GenerateObstacle(obstacleYSpawn);
+                }
+                obstacleYSpawn += (Width / 2);
+            }
+            
+            // beginning of the tear
             var startPoint = Width / 2 - startSize / 2 + 1;
 
             for (int y = 0; y <= _currentLine; y++)
@@ -104,6 +125,7 @@ namespace Grid
                 }
             }
 
+            // filling color array
             var index = 0;
             for (int y = 0; y < Height; y++)
             {
@@ -114,7 +136,27 @@ namespace Grid
                 }
             }
 
+            // applying colors to the texture
             ApplyTexture();
+        }
+
+        private void GenerateObstacle(int yPosition)
+        {
+            var texture = obstacleTexture[Random.Range(0, obstacleTexture.Length)];
+            var pixels = texture.GetPixels();
+            
+            for (int y = 0; y < texture.height; y++)
+            {
+                for (int x = 0; x < texture.width; x++)
+                {
+                    var index = y * texture.width + x;
+                    
+                    var ySpawn = y + yPosition;
+                    if (ySpawn >= Height) return;
+                    
+                    _grid[x, ySpawn] = pixels[index] == Color.white ? 0 : 2;
+                }
+            }
         }
 
         private void WipeCells()
@@ -232,8 +274,6 @@ namespace Grid
             {
                 _colors[colorIndex] = ColorFilled;
             }
-
-            // _colors[colorIndex] = _grid[x, y] == 0 ? ColorEmpty : colorFilled;
         }
     }
 }

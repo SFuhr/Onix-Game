@@ -35,9 +35,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Grid/TextureGrid.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Platform/PlatformMain.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Level/LevelLoader.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Miscellaneous/FollowCamera.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/MeshGrid.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/Mover.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Level/LevelManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/IInteractable.cs" />
@@ -45,6 +42,10 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/Obstacle.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/BasePickup.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/Heart.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Level/Boot.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Miscellaneous/FollowCamera.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/Mover.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/MeshGrid.cs" />
       </list>
     </option>
   </component>
@@ -113,6 +114,9 @@
       <workItem from="1613256506650" duration="461000" />
       <workItem from="1613302270539" duration="616000" />
       <workItem from="1613382460569" duration="24739000" />
+      <workItem from="1613425805699" duration="1736000" />
+      <workItem from="1613431902708" duration="587000" />
+      <workItem from="1613435274540" duration="2049000" />
     </task>
     <servers />
   </component>

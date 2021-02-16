@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Miscellaneous;
 using Player;
 using UnityEngine;
 
@@ -22,6 +23,7 @@ namespace Grid
         private void Start()
         {
             _defaultPosition = Position;
+            FollowCamera.OnSetFollowTarget(transform);
         }
 
         IEnumerator PerformMoving()
