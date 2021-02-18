@@ -1,6 +1,6 @@
 ﻿using System;
+using GameController;
 using Grid;
-using Player;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,12 +8,6 @@ namespace Level
 {
     public class LevelManager : MonoBehaviour
     {
-        private static Action _levelFailed;
-        private static void OnLevelFailed() => _levelFailed?.Invoke();
-
-        private static Action _levelCompleted;
-        private static void OnLevelCompleted() => _levelCompleted?.Invoke();
-        
         [Header("Grid")]
         [SerializeField] private MeshGrid mainGrid;
         [SerializeField] private bool randomEmptyColor = true;
@@ -23,24 +17,26 @@ namespace Level
 
         [Header("Mover")]
         [SerializeField] private Mover mover;
-
+        
+        public static Action LevelStarted;
+        private static void OnLevelStarted() => LevelStarted?.Invoke();
+        public static Action<bool> LevelEnded;
+        public static void OnLevelEnded(bool success) => LevelEnded?.Invoke(success);
+        
         private void Start()
         {
-            PlayerController.OnSetLevelManager(this);
             InitializeLevel();
-        }
+            
+            InputController.OnLevelLoaded(this);
 
-        private void OnEnable()
-        {
-            _levelFailed += _levelFailed;
-            _levelCompleted += _levelCompleted;
+            // LevelStarted += () => Debug.Log("Callback: Level has started");
+            // LevelFailed += () => Debug.Log("Callback: Level was failed!");
+            // LevelCompleted += () => Debug.Log("Callback: Level was successfully completed!");
+            
+            // Cursor.lockState = CursorLockMode.Locked;
+            // Cursor.visible = false;
         }
-        private void OnDisable()
-        {
-            _levelFailed -= _levelFailed;
-            _levelCompleted -= _levelCompleted;
-        }
-
+        
         private void InitializeLevel()
         {
             if (mainGrid == null) return;
@@ -50,17 +46,17 @@ namespace Level
             mainGrid.FullReset();
         }
 
-        private void LevelFailed()
+        public void RunMover()
         {
+            mover.Activate(); 
             
+            // triggering the level started event
+            OnLevelStarted();
         }
 
-        private void LevelCompleted()
+        public void SetHorizontalAxis(float horizontal)
         {
-            
+            mover.SetHorizontalPosition(horizontal);
         }
-
-        public void ActivateMover() => mover.Activate();
-        public void SetMouseXAxis(float xAxis) => mover.SetXAxis(xAxis);
     }
 }

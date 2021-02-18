@@ -2,7 +2,8 @@
 
 namespace Pickups
 {
-    public class Heart : BasePickup
+    [AddComponentMenu("Pickup/Star")]
+    public class Star : BasePickup
     {
         public override void PickUp()
         {

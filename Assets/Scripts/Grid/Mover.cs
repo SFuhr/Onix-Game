@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
+using Level;
 using Miscellaneous;
-using Player;
 using UnityEngine;
 
 namespace Grid
@@ -9,16 +8,16 @@ namespace Grid
     public class Mover : MonoBehaviour
     {
         [SerializeField] private float fallSpeed = 5f;
-        [SerializeField] private float xBorder = 10f;
         [SerializeField] private float yBorder = 100f;
 
-        [Header("Mesh Grid")] [SerializeField] private MeshGrid grid;
-
-        private Vector3 Position => transform.position;
-
+        [Header("Mesh Grid")]
+        [SerializeField] private MeshGrid grid;
+        
         private Vector3 _defaultPosition;
         private bool _isMoving;
-        private float _xAxis;
+        private int _horizontalPosition;
+        
+        private Vector3 Position => transform.position;
 
         private void Start()
         {
@@ -32,8 +31,6 @@ namespace Grid
             {
                 var pos = Position;
                 var fall = Time.deltaTime * fallSpeed;
-                pos.x = Mathf.Clamp(pos.x + _xAxis, -xBorder, xBorder);
-                // pos.y = Mathf.Clamp(pos.y - fall, -yBorder, yBorder);
                 pos.y -= fall;
 
                 if (pos.y < -yBorder)
@@ -44,7 +41,7 @@ namespace Grid
 
                 transform.position = pos;
 
-                grid.UpdatePixels(pos, xBorder);
+                grid.UpdatePixels(pos.y, _horizontalPosition);
                 yield return null;
             }
         }
@@ -53,6 +50,8 @@ namespace Grid
         {
             if (!_isMoving)
             {
+                // begin level
+                
                 _isMoving = true;
 
                 ResetPosition();
@@ -61,9 +60,9 @@ namespace Grid
             }
         }
 
-        public void SetXAxis(float axis)
+        public void SetHorizontalPosition(float horPos)
         {
-            _xAxis = axis;
+            _horizontalPosition = (int)Mathf.Round(horPos);
         }
 
         private void ResetPosition()
