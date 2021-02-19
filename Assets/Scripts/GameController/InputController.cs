@@ -32,7 +32,7 @@ namespace GameController
         {
             if (!LevelExists) return;
             
-            _level.RunMover();
+            _level.StartLevel();
         }
     }
 }

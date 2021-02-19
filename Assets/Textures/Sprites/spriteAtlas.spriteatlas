@@ -46,8 +46,14 @@ SpriteAtlas:
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 7f98bcd9508d0d845be97f61c1d59188, type: 3}
+  - {fileID: -2140119982247756293, guid: adc908e9fde1bc74cb295231b9824b29, type: 3}
+  - {fileID: 2377740740814273991, guid: adc908e9fde1bc74cb295231b9824b29, type: 3}
   - {fileID: 21300000, guid: 1f876d3beb35d8841a57583c84c2798c, type: 3}
   m_PackedSpriteNamesToIndex:
+  - ui_starIcon
+  - ui_levelSlider
+  - ui_whiteSquare
   - ui_playbutton
   m_Tag: spriteAtlas
   m_IsVariant: 0

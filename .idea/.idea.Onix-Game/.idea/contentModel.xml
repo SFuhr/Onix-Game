@@ -29,7 +29,9 @@
           </e>
           <e p="UI" t="Include">
             <e p="HandPointer.cs" t="Include" />
-            <e p="MainCanvas.cs" t="Include" />
+            <e p="LevelSlider.cs" t="Include" />
+            <e p="MainUi.cs" t="Include" />
+            <e p="WorldUi.cs" t="Include" />
           </e>
         </e>
         <e p="TextMesh Pro" t="Include">

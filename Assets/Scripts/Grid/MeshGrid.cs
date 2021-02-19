@@ -45,7 +45,7 @@ namespace Grid
         private Color ColorFilled => _colorFilled;
         
         private Color ColorPickupRuby => Color.blue;
-        private Color ColorPickupStar => Color.yellow;
+        private Color ColorPickupStar => Color.green;
         
         public void SetColors(Color empty, Color filled, float emptyRange = 1)
         {

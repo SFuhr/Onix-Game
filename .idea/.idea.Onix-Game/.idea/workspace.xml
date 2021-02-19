@@ -35,7 +35,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/IInteractable.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/IPickable.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/Obstacle.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Level/Boot.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/BasePickup.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Miscellaneous/FollowCamera.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
@@ -43,16 +42,20 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Level/LevelController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController/InputController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Controller/InputController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/Mover.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Level/LevelManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/UiPlayLevel.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/UiMain.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UI/MainCanvas.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameController/InputController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/Star.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/Heart.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/Ruby.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/MainCanvas.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/WorldUi.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/MainUi.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Level/LevelManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/Mover.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Grid/MeshGrid.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/LevelSlider.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Level/Boot.cs" />
       </list>
     </option>
   </component>
@@ -128,6 +131,9 @@
       <workItem from="1613561570221" duration="587000" />
       <workItem from="1613582651975" duration="4767000" />
       <workItem from="1613608923738" duration="6237000" />
+      <workItem from="1613650920550" duration="1573000" />
+      <workItem from="1613676222911" duration="629000" />
+      <workItem from="1613686556699" duration="7893000" />
     </task>
     <servers />
   </component>
@@ -144,9 +150,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="590" y="204" width="998" height="708" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1605955715450" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1613612481987">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1613699591657">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1613612481987" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1613699591657" />
   </component>
 </project>

@@ -361,7 +361,7 @@ MonoBehaviour:
   mainGrid: {fileID: 1550092560}
   randomEmptyColor: 1
   gridColorEmpty: {r: 1, g: 1, b: 1, a: 1}
-  gridColorFilled: {r: 0, g: 0, b: 0, a: 1}
+  gridColorFilled: {r: 1, g: 1, b: 1, a: 0}
   emptyColorRange: 0.95
   mover: {fileID: 1619416265}
 --- !u!4 &733817138
@@ -776,6 +776,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: cce5fd3ea8885e84c86b7051481416bb, type: 3}
   - {fileID: 2800000, guid: 845a15ac772f88742932d63597c49f3a, type: 3}
   - {fileID: 2800000, guid: 59024917a9a1d8a4c990c5e8a1b45449, type: 3}
+  - {fileID: 2800000, guid: cce436d2395e54242a6dda43e366a55a, type: 3}
   ruby: {fileID: 5584332586014635632, guid: 6dcc64ba06bb0c048ae567995aa8cb86, type: 3}
   star: {fileID: 8911770206990330317, guid: 2cfa93834ab5b9b44b843d256807731e, type: 3}
   pickupSpawnChance: 40

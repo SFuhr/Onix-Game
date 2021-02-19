@@ -28,13 +28,8 @@ namespace Level
             InitializeLevel();
             
             InputController.OnLevelLoaded(this);
-
-            // LevelStarted += () => Debug.Log("Callback: Level has started");
-            // LevelFailed += () => Debug.Log("Callback: Level was failed!");
-            // LevelCompleted += () => Debug.Log("Callback: Level was successfully completed!");
             
-            // Cursor.lockState = CursorLockMode.Locked;
-            // Cursor.visible = false;
+            
         }
         
         private void InitializeLevel()
@@ -46,7 +41,7 @@ namespace Level
             mainGrid.FullReset();
         }
 
-        public void RunMover()
+        public void StartLevel()
         {
             mover.Activate(); 
             

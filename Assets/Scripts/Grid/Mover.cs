@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Level;
 using Miscellaneous;
+using UI;
 using UnityEngine;
 
 namespace Grid
@@ -40,8 +41,12 @@ namespace Grid
                 }
 
                 transform.position = pos;
-
+                
+                // updating grid pixels
                 grid.UpdatePixels(pos.y, _horizontalPosition);
+                
+                // Updating ui
+                LevelSlider.Instance.SetFill(Mathf.Abs(pos.y),yBorder);
                 yield return null;
             }
         }

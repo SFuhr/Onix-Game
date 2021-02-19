@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class MainCanvas : MonoBehaviour
+    public class WorldUi : MonoBehaviour
     {
         [SerializeField] private Button playButton;
 
