@@ -14,6 +14,12 @@
             <e p="MeshGrid.cs" t="Include" />
             <e p="Mover.cs" t="Include" />
           </e>
+          <e p="Items" t="Include">
+            <e p="BaseItem.cs" t="Include" />
+            <e p="IUsable.cs" t="Include" />
+            <e p="Ruby.cs" t="Include" />
+            <e p="Star.cs" t="Include" />
+          </e>
           <e p="Level" t="Include">
             <e p="Boot.cs" t="Include" />
             <e p="LevelManager.cs" t="Include" />
@@ -21,16 +27,9 @@
           <e p="Miscellaneous" t="Include">
             <e p="FollowCamera.cs" t="Include" />
           </e>
-          <e p="Pickups" t="Include">
-            <e p="BasePickup.cs" t="Include" />
-            <e p="IPickable.cs" t="Include" />
-            <e p="Ruby.cs" t="Include" />
-            <e p="Star.cs" t="Include" />
-          </e>
           <e p="UI" t="Include">
             <e p="HandPointer.cs" t="Include" />
             <e p="LevelSlider.cs" t="Include" />
-            <e p="MainUi.cs" t="Include" />
             <e p="WorldUi.cs" t="Include" />
           </e>
         </e>

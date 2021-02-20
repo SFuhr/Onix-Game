@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
-namespace Pickups
+namespace Items
 {
     [AddComponentMenu("Pickup/Ruby")]
-    public class Ruby : BasePickup
+    public class Ruby : BaseItem
     {
-        public override void PickUp()
+        public override void Use()
         {
             
         }

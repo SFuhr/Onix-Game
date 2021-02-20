@@ -2,51 +2,60 @@
 using GameController;
 using Grid;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Level
 {
     public class LevelManager : MonoBehaviour
     {
-        [Header("Grid")]
-        [SerializeField] private MeshGrid mainGrid;
-        [SerializeField] private bool randomEmptyColor = true;
-        [SerializeField] private Color gridColorEmpty = new Color(1, 1, 1, 1);
-        [SerializeField] private Color gridColorFilled = new Color(0, 0, 0, 1);
-        [SerializeField] [Range(0, 1)] private float emptyColorRange = 0.85f;
-
-        [Header("Mover")]
+        [Header("Grid & Mover")]
+        [SerializeField] private MeshGrid grid;
         [SerializeField] private Mover mover;
         
         public static Action LevelStarted;
-        private static void OnLevelStarted() => LevelStarted?.Invoke();
+        public static void OnLevelStart() => LevelStarted?.Invoke();
         public static Action<bool> LevelEnded;
         public static void OnLevelEnded(bool success) => LevelEnded?.Invoke(success);
+
+        public static Action LevelReset;
+        public static void OnLevelReset() => LevelReset?.Invoke();
         
         private void Start()
         {
             InitializeLevel();
             
             InputController.OnLevelLoaded(this);
-            
-            
+
+            LevelStarted += () =>
+            {
+                // Debug.Log($"Level just started...");
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                
+                if(grid.IsMessy) grid.ResetGrid();
+                mover.Activate();
+            };
+            LevelEnded += success =>
+            {
+                // var win = success ? "Win!" : "Lose :(";
+                // Debug.Log($"Level ended as {win}");
+                mover.Stop(false);
+            };
+            LevelReset += () =>
+            {
+                // Debug.Log("Level Was Reseted! ");
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                
+                if(grid.IsMessy) grid.ResetGrid();
+                mover.Stop(true);
+            };
         }
         
         private void InitializeLevel()
         {
-            if (mainGrid == null) return;
-
-            var emptyColor = randomEmptyColor ? Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f) : gridColorEmpty;
-            mainGrid.SetColors(emptyColor,gridColorFilled,emptyColorRange);
-            mainGrid.FullReset();
-        }
-
-        public void StartLevel()
-        {
-            mover.Activate(); 
+            if (grid == null) return;
             
-            // triggering the level started event
-            OnLevelStarted();
+            grid.Initialize();
         }
 
         public void SetHorizontalAxis(float horizontal)

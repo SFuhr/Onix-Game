@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
-namespace Pickups
+namespace Items
 {
     [AddComponentMenu("Pickup/Star")]
-    public class Star : BasePickup
+    public class Star : BaseItem
     {
-        public override void PickUp()
+        public override void Use()
         {
             
         }

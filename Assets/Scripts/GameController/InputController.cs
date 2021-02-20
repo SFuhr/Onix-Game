@@ -26,13 +26,20 @@ namespace GameController
             
             var horizontal = Input.GetAxisRaw("Mouse X") * mouseSpeed;
             _level.SetHorizontalAxis(horizontal);
+            
+            // test
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                LevelManager.OnLevelReset();
+                LevelManager.OnLevelEnded(false);
+            }
         }
 
         public void RunLevel()
         {
             if (!LevelExists) return;
             
-            _level.StartLevel();
+            LevelManager.OnLevelStart();
         }
     }
 }

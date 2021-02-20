@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Level;
 using Miscellaneous;
 using UI;
 using UnityEngine;
@@ -28,6 +27,8 @@ namespace Grid
 
         IEnumerator PerformMoving()
         {
+            grid.BeginMessing();
+            
             while (_isMoving)
             {
                 var pos = Position;
@@ -51,6 +52,13 @@ namespace Grid
             }
         }
 
+        public void Stop(bool resetPosition)
+        {
+            if (!_isMoving) return;
+            _isMoving = false;
+            if(resetPosition) Reset();
+        }
+
         public void Activate()
         {
             if (!_isMoving)
@@ -59,7 +67,7 @@ namespace Grid
                 
                 _isMoving = true;
 
-                ResetPosition();
+                Reset();
                 
                 StartCoroutine(PerformMoving());
             }
@@ -70,7 +78,7 @@ namespace Grid
             _horizontalPosition = (int)Mathf.Round(horPos);
         }
 
-        private void ResetPosition()
+        private void Reset()
         {
             transform.position = _defaultPosition;
         }
