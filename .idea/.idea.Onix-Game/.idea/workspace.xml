@@ -12,14 +12,11 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Items/IUsable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Items/Ruby.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Items/Star.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Items/BaseItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Items/ItemBase.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Mesh/Editor/MeshCombinerEditor.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Mesh/MeshCombiner.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/MeshGrid/MeshCombiner.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SimpleCameraController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Level/GenerateLevel.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Level/MainGrid.cs" />
@@ -61,11 +58,16 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/IPickable.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/IUsable.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/BaseItem.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Items/BaseItem.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameController/InputController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Level/LevelManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/ItemsManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Player/Score.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Items/Ruby.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Items/BaseItem.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Items/ItemsManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Grid/Mover.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Grid/MeshGrid.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Player/InputController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Level/LevelManager.cs" />
       </list>
     </option>
   </component>
@@ -148,7 +150,9 @@
       <workItem from="1613739411435" duration="1507000" />
       <workItem from="1613752475226" duration="2163000" />
       <workItem from="1613771138755" duration="584000" />
-      <workItem from="1613780358569" duration="10267000" />
+      <workItem from="1613780358569" duration="10897000" />
+      <workItem from="1613862014375" duration="1181000" />
+      <workItem from="1613915474651" duration="19281000" />
     </task>
     <servers />
   </component>

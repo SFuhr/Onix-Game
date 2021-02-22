@@ -3,8 +3,9 @@
 namespace Items
 {
     [AddComponentMenu("Pickup/Ruby")]
-    public class Ruby : BaseItem
+    public class Ruby : ItemBase
     {
+
         public override void Use()
         {
             

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Level;
+﻿using Level;
 using Items;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -15,42 +14,53 @@ namespace Grid
         [SerializeField] [Min(1)] private int tearStartHeight = 8;
         [SerializeField] [Range(1, 1000)] private int updateAccuracy = 1000;
 
+        [Tooltip("The total number of lines needed to spread is divided by this value when rubies effect is active.")]
+        [SerializeField]
+        [Range(1, 10)]
+        private int improvedSpreadValue = 4;
+
         [Header("Pixel Colors")] [SerializeField]
         private Color tearColor = new Color(0, 0, 0, 0);
 
         [SerializeField] [Range(0, 1)] private float randomColorRange = 0.85f;
+        [SerializeField] private bool useColorBorder = true;
+        [SerializeField] private Color borderColor = new Color(0, 0, 0, 1);
 
         [Header("Obstacles")] [SerializeField] [Range(0, 100)]
         private float obstacleSpawnChance = 30f;
 
         [SerializeField] private Texture2D[] obstacleTexture;
 
-        [Header("Pickup Prefabs")]
-        [SerializeField] private Ruby ruby;
-        [SerializeField] private Star star;
-        [SerializeField] [Range(0, 100)] private float pickupSpawnChance = 40f;
-        [SerializeField] private Texture2D[] pickupTexture;
+        [Header("Items")] [SerializeField] private Texture2D[] pickupTexture;
+        [SerializeField] [Range(0, 100)] private float pickupSpawnChance;
+        [SerializeField] private ItemsManager itemsManager;
 
         private byte[,] _grid;
+
         private Color[] _colors;
-        private List<BaseItem> _items;
+        // private List<BaseItem> _items;
 
         private Renderer _renderer;
         private Texture2D _texture;
         private Color _colorEmpty;
+        private float _horizontalMoveValue;
         private int _moverFirstPoint;
         private int _currentLine;
         private int _spreadReady;
         private int _tearFinalSize;
-        private int _spreadEachXLines;
+        private int _spreadEachLines;
+        private int _spreadEachLinesImproved;
+        private int _rubiesAcquired;
         private bool _messyGrid;
+        private bool _improvedSpreadEnabled;
 
+        private const int RubySpreadRubiesNeeded = 3;
         private int Width => _texture.width;
         private int Height => _texture.height;
         private Vector3 Size => _renderer.bounds.size;
-
         private Color ColorEmpty => Color.Lerp(_colorEmpty, _colorEmpty * randomColorRange, Random.Range(0f, 1f));
         private Color ColorFilled => tearColor;
+        private Color ColorBorder => borderColor;
         private Color ColorPickupRuby => Color.blue;
         private Color ColorPickupStar => Color.green;
 
@@ -71,6 +81,16 @@ namespace Grid
             _messyGrid = true;
         }
 
+        public void RubyAcquired()
+        {
+            _rubiesAcquired++;
+            if (_rubiesAcquired >= RubySpreadRubiesNeeded)
+            {
+                _rubiesAcquired = 0;
+                _improvedSpreadEnabled = true;
+            }
+        }
+
         private void InitializeGrid()
         {
             GetComponent<MeshFilter>();
@@ -80,7 +100,8 @@ namespace Grid
 
             _colors = new Color[Width * Height];
             _grid = new byte[Width, Height];
-            _items = new List<BaseItem>();
+
+            itemsManager.Initialize();
 
             GenerateCells();
         }
@@ -103,28 +124,10 @@ namespace Grid
 
             _currentLine = tearStartHeight;
 
-            _spreadEachXLines = Height / ((_tearFinalSize - startSize) / 2);
-            _spreadReady = _spreadEachXLines;
+            _spreadEachLines = Height / ((_tearFinalSize - startSize) / 2);
+            _spreadReady = _spreadEachLines;
 
-            // creating obstacles and pickups
-            // important hardcoded calculation gives us the first line to spawn obstacles or pickups in
-            var spawnLine = _currentLine * 3;
-
-            while (spawnLine < (Height - Width / 2))
-            {
-                if (Random.Range(0, 100) < obstacleSpawnChance)
-                {
-                    // spawn an obstacle
-                    SpawnObjectByTexture(spawnLine, ref obstacleTexture);
-                }
-                else if (Random.Range(0, 100) < pickupSpawnChance)
-                {
-                    // spawn a pickup
-                    SpawnObjectByTexture(spawnLine, ref pickupTexture);
-                }
-
-                spawnLine += (Width / 2);
-            }
+            _spreadEachLinesImproved = (int) Mathf.Round((float) _spreadEachLines / improvedSpreadValue);
 
             // beginning of the tear
             var startPoint = Width / 2 - startSize / 2 + 1;
@@ -143,16 +146,11 @@ namespace Grid
                 }
             }
 
-            // filling color array
-            var index = 0;
-            for (int y = 0; y < Height; y++)
-            {
-                for (int x = 0; x < Width; x++)
-                {
-                    _colors[index] = _grid[x, y] == 0 ? ColorEmpty : ColorFilled;
-                    index++;
-                }
-            }
+            // creating obstacles and pickups
+            SpawnObjects();
+
+            // filling the color array
+            FillColorArray();
 
             // Generating Stars and Rubies
             GeneratePickups();
@@ -161,12 +159,75 @@ namespace Grid
             ApplyTexture();
         }
 
+        private void SpawnObjects()
+        {
+            // important hardcoded calculation gives us the first line to spawn obstacles or pickups in
+            var spawnLine = _currentLine * 3;
+            var obstacleOrder = false;
+
+            while (spawnLine < (Height - Width / 2))
+            {
+                obstacleOrder = !obstacleOrder;
+                if (obstacleOrder)
+                {
+                    if (Random.Range(0, 100) < obstacleSpawnChance)
+                    {
+                        // spawn an obstacle
+                        SpawnObjectByTexture(spawnLine, ref obstacleTexture);
+                    }
+                }
+                else
+                {
+                    if (Random.Range(0, 100) < pickupSpawnChance)
+                    {
+                        // spawn a pickup
+                        SpawnObjectByTexture(spawnLine, ref pickupTexture);
+                    }
+                }
+
+                spawnLine += (Width / 2);
+            }
+        }
+
         private void SpawnObjectByTexture(int yPosition, ref Texture2D[] possibleObjects)
         {
-            if (Random.Range(0, 100) < obstacleSpawnChance) return;
-
             var texture = possibleObjects[Random.Range(0, possibleObjects.Length)];
             var pixels = texture.GetPixels();
+
+            var a = 0;
+            var b = pixels.Length - 1;
+            
+            while (a < b)
+            {
+                var temp = pixels[a];
+                pixels[a] = pixels[b];
+                pixels[b] = temp;
+
+                a++;
+                b--;
+            }
+
+            // flip the texture with 50% chance
+            // if (Random.Range(0, 100) < 50)
+            // {
+            //     var textureHeight = texture.height;
+            //     var textureWidth = texture.width;
+            //
+            //     for (int i = 0; i < textureHeight; i++)
+            //     {
+            //         a = 0;
+            //         b = textureWidth - 1;
+            //
+            //         while (a < b)
+            //         {
+            //             var hold = pixels[(i * textureHeight) + (a)];
+            //             pixels[(i * textureHeight) + (a)] = pixels[(i * textureHeight) + (b)];
+            //             pixels[(i * textureHeight) + (b)] = hold;
+            //             a++;
+            //             b--;
+            //         }
+            //     }
+            // }
 
             for (int y = 0; y < texture.height; y++)
             {
@@ -198,7 +259,6 @@ namespace Grid
 
         private void GeneratePickups()
         {
-            // 3 = ruby; 4 = star
             for (int y = 0; y < Height; y++)
             {
                 for (int x = 0; x < Width; x++)
@@ -207,18 +267,20 @@ namespace Grid
 
                     if (cell < 3) continue;
 
+                    _grid[x, y] = 0;
                     var pos = GridToWorldPosition(x, y);
-                    BaseItem item;
-                    
-                    if (cell == 3)
-                    {
-                        item = Instantiate(ruby, pos, Quaternion.identity);
-                    }
-                    else
-                    {
-                        item = Instantiate(star, pos, Quaternion.identity);
-                    }
-                    _items.Add(item);
+                    itemsManager.SpawnItem(cell, pos);
+                }
+            }
+        }
+
+        private void FillColorArray()
+        {
+            for (int y = 0; y < Height; y++)
+            {
+                for (int x = 0; x < Width; x++)
+                {
+                    UpdateCellColor(x, y, true);
                 }
             }
         }
@@ -230,21 +292,12 @@ namespace Grid
                 for (int x = 0; x < Width; x++)
                 {
                     _grid[x, y] = 0;
-                    UpdateCellColor(x, y);
                 }
             }
 
-            if (_items.Count > 0)
-            {
-                foreach (var item in _items)
-                {
-                    item.Remove();
-                }
-            }
-            _items.Clear();
-            
+            itemsManager.WipeActiveItems();
+
             _messyGrid = false;
-            ApplyTexture();
         }
 
         private Vector3 GridToWorldPosition(int gridX, int gridY)
@@ -260,9 +313,10 @@ namespace Grid
             return vec;
         }
 
-        public void UpdatePixels(float moverYPos, int x)
+        public void UpdatePixels(float moverYPos, float x)
         {
             if (!_messyGrid) return;
+            _horizontalMoveValue += x;
 
             var y = Mathf.Abs(Mathf.Round(Mathf.Min(1, moverYPos * updateAccuracy)));
             var expectedLine = (int) (Height * (y / (updateAccuracy * 100)));
@@ -270,16 +324,25 @@ namespace Grid
             if (_currentLine >= expectedLine) return;
             if (_currentLine >= Height) return;
 
-            UpdateTearCells(expectedLine, x);
+            UpdateTearCells(expectedLine);
         }
 
-        private void UpdateTearCells(int expectedLine, int xAxis)
+        private void UpdateTearCells(int expectedLine)
         {
-            // changing grid map
+            // changing the grid map
             var hasActiveCells = false;
             for (int y = _currentLine; y < expectedLine; y++, _currentLine++)
             {
-                _spreadReady = _spreadReady > 0 ? _spreadReady - 1 : _spreadEachXLines;
+                // define if the tear is spreading this time
+                if (_spreadReady > 0)
+                {
+                    _spreadReady--;
+                }
+                else
+                {
+                    _spreadReady = !_improvedSpreadEnabled ? _spreadEachLines : _spreadEachLinesImproved;
+                }
+
                 for (int x = 0; x < Width; x++)
                 {
                     if (_grid[x, y] == 0 || _grid[x, y] == 1)
@@ -302,18 +365,24 @@ namespace Grid
                     }
 
                     // updating pixels
-                    UpdateCellColor(x, y);
+                    UpdateCellColor(x, y, false);
                 }
             }
 
-            // changing a x position
-            if (xAxis != 0) TearSideMover(xAxis);
+            // changing the x position
+            if (Mathf.Abs(_horizontalMoveValue) > 0)
+            {
+                var xSteps = (int)Mathf.Round(_horizontalMoveValue);
+                _horizontalMoveValue = 0;
+                
+                TearSideMover(xSteps);
+            }
 
             ApplyTexture();
 
             if (!hasActiveCells)
             {
-                // no active tear left, level is lost
+                // no active tears left, level is lost
                 LevelManager.OnLevelEnded(false);
             }
         }
@@ -348,7 +417,7 @@ namespace Grid
 
             for (int x = 0; x < Width; x++)
             {
-                UpdateCellColor(x, y);
+                UpdateCellColor(x, y, false);
             }
         }
 
@@ -359,13 +428,45 @@ namespace Grid
         }
 
         // function updates the color in array based on grid value
-        private void UpdateCellColor(int x, int y)
+        private void UpdateCellColor(int x, int y, bool updateEmpty)
         {
             var colorIndex = y * Width + x;
             var cell = _grid[x, y];
 
-            if (cell == 0) return;
-            _colors[colorIndex] = ColorFilled;
+            if (cell == 0)
+            {
+                if (updateEmpty)
+                {
+                    _colors[colorIndex] = ColorEmpty;
+                }
+
+                if (!useColorBorder) return;
+                if (x - 1 <= 0 || !CellIsFilled(x - 1, y)) return;
+
+                _colors[colorIndex] = ColorBorder;
+                // for (int i = 0; i < 2; i++)
+                // {
+                //     if (x - i > 0)
+                //     {
+                //         _colors[colorIndex + i] = ColorBorder;
+                //     }
+                //     else
+                //     {
+                //         return;
+                //     }
+                // }
+            }
+            else
+            {
+                _colors[colorIndex] = ColorFilled;
+            }
+        }
+
+        private bool CellIsFilled(int x, int y)
+        {
+            // 0 = filled; 3,4 - filled too but with items
+            // 1 - player's tear; 2 - obstacle -> both must be empty
+            return _grid[x, y] == 1 || _grid[x, y] == 2;
         }
     }
 }

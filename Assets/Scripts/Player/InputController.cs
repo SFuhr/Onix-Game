@@ -2,12 +2,12 @@
 using Level;
 using UnityEngine;
 
-namespace GameController
+namespace Player
 {
     public class InputController : MonoBehaviour
     {
         [Header("Inputs")]
-        [SerializeField] [Range(1,10)] private int mouseSpeed = 4;
+        [SerializeField] [Range(50,500)] private int mouseSpeed = 200;
 
         private LevelManager _level;
         
@@ -24,8 +24,8 @@ namespace GameController
         {
             if (!LevelExists) return;
             
-            var horizontal = Input.GetAxisRaw("Mouse X") * mouseSpeed;
-            _level.SetHorizontalAxis(horizontal);
+            // var horizontal = Input.GetAxis("Mouse X") * mouseSpeed * Time.deltaTime;
+            // _level.SetHorizontalAxis(horizontal);
             
             // test
             if (Input.GetKeyUp(KeyCode.Escape))

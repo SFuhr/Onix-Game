@@ -1,5 +1,5 @@
 ﻿using System;
-using GameController;
+using Player;
 using Grid;
 using UnityEngine;
 
@@ -58,9 +58,9 @@ namespace Level
             grid.Initialize();
         }
 
-        public void SetHorizontalAxis(float horizontal)
-        {
-            mover.SetHorizontalPosition(horizontal);
-        }
+        // public void SetHorizontalAxis(float horizontal)
+        // {
+        //     mover.SetHorizontalPosition(horizontal);
+        // }
     }
 }

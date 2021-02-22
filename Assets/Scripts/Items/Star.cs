@@ -3,7 +3,7 @@
 namespace Items
 {
     [AddComponentMenu("Pickup/Star")]
-    public class Star : BaseItem
+    public class Star : ItemBase
     {
         public override void Use()
         {

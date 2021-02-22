@@ -15,7 +15,7 @@ namespace Grid
         
         private Vector3 _defaultPosition;
         private bool _isMoving;
-        private int _horizontalPosition;
+        private float _horizontalPosition;
         
         private Vector3 Position => transform.position;
 
@@ -75,7 +75,7 @@ namespace Grid
 
         public void SetHorizontalPosition(float horPos)
         {
-            _horizontalPosition = (int)Mathf.Round(horPos);
+            _horizontalPosition = horPos;
         }
 
         private void Reset()
