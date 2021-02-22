@@ -12,6 +12,7 @@ namespace Items
         [SerializeField] private Ruby ruby;
         [SerializeField] private Star star;
         [SerializeField] private LayerMask itemLayer;
+        [SerializeField] private Explosion explosion;
 
         private List<BaseItem> _activeItems;
         private Vector3[] _pointsToScan;
@@ -62,16 +63,19 @@ namespace Items
 
             foreach (var item in _activeItems)
             {
-                item.Destroy();
+                item.RemoveInstantly();
             }
             _activeItems.Clear();
         }
 
         private void UseAndRemoveItem(IUsable usable)
         {
-            usable.Use();
+            if (!usable.Usable()) return;
+            
             _activeItems.Remove(usable.GetItem());
-            usable.Destroy();
+            usable.Use();
+
+            Object.Instantiate(explosion, usable.Position(), Quaternion.identity);
         }
 
         private void ScanForItemsByBounds(Vector3 center, Vector3 extends)

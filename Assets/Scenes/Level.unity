@@ -308,6 +308,8 @@ MonoBehaviour:
     itemLayer:
       serializedVersion: 2
       m_Bits: 1024
+    explosion: {fileID: 1171019868813766545, guid: 0953f7b62eaea2a4781ec8154d255a3a,
+      type: 3}
 --- !u!1 &1553658986
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@
           </e>
           <e p="Items" t="Include">
             <e p="BaseItem.cs" t="Include" />
+            <e p="Explosion.cs" t="Include" />
             <e p="ItemsManager.cs" t="Include" />
             <e p="IUsable.cs" t="Include" />
             <e p="Ruby.cs" t="Include" />

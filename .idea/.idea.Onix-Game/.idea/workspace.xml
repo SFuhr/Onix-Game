@@ -16,7 +16,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlatformBrain.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Platform/Platform.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Platform/PlatformBrain.cs" />
         <option value="$PROJECT_DIR$/Assets/Shaders/Grid.shader" />
@@ -64,9 +63,10 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Items/ItemAbstract.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Items/Star.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Items/Ruby.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Items/Explosion.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Items/IUsable.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Items/BaseItem.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Items/ItemsManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Items/BaseItem.cs" />
       </list>
     </option>
   </component>
@@ -151,7 +151,7 @@
       <workItem from="1613771138755" duration="584000" />
       <workItem from="1613780358569" duration="10897000" />
       <workItem from="1613862014375" duration="1181000" />
-      <workItem from="1613915474651" duration="26915000" />
+      <workItem from="1613915474651" duration="29642000" />
     </task>
     <servers />
   </component>
