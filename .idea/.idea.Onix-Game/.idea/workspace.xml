@@ -8,20 +8,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Grid/MeshGrid.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Items/IUsable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Grid/GridMesh.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Items/Ruby.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Items/Star.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Items/ItemBase.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Items/BaseItem.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/SimpleCameraController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Level/GenerateLevel.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Level/MainGrid.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PlatformBrain.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Player/MainController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlatformBrain.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Platform/Platform.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Platform/PlatformBrain.cs" />
@@ -38,7 +32,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Level/LevelLoader.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/IInteractable.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/Obstacle.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Miscellaneous/FollowCamera.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/HandPointer.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Level/LevelController.cs" />
@@ -50,10 +43,8 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/Heart.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/Ruby.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/MainCanvas.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UI/WorldUi.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/MainUi.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/LevelSlider.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Level/Boot.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/BasePickup.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/IPickable.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/IUsable.cs" />
@@ -61,13 +52,21 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/GameController/InputController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Grid/ItemsManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/Score.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Player/InputController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/MeshGrid.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/WorldUi.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Level/LevelManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Level/Boot.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Miscellaneous/FollowCamera.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/Mover.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/GridMesh.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Items/ItemBase.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Items/ItemAbstract.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Items/Star.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Items/Ruby.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Items/IUsable.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Items/BaseItem.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Items/ItemsManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/Mover.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/MeshGrid.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Player/InputController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Level/LevelManager.cs" />
       </list>
     </option>
   </component>
@@ -152,7 +151,7 @@
       <workItem from="1613771138755" duration="584000" />
       <workItem from="1613780358569" duration="10897000" />
       <workItem from="1613862014375" duration="1181000" />
-      <workItem from="1613915474651" duration="19281000" />
+      <workItem from="1613915474651" duration="26915000" />
     </task>
     <servers />
   </component>
@@ -165,6 +164,10 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="727" y="244" key="RiderGenerateDialog" timestamp="1613975328157">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="727" y="244" key="RiderGenerateDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1613975328157" />
     <state x="590" y="204" width="998" height="708" key="SettingsEditor" timestamp="1605955715450">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

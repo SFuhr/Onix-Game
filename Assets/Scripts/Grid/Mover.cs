@@ -7,34 +7,38 @@ namespace Grid
 {
     public class Mover : MonoBehaviour
     {
+        [SerializeField] private float mouseSpeed = 100f;
         [SerializeField] private float fallSpeed = 5f;
         [SerializeField] private float yBorder = 100f;
 
-        [Header("Mesh Grid")]
-        [SerializeField] private MeshGrid grid;
-        
+        private GridMesh _grid;
         private Vector3 _defaultPosition;
         private bool _isMoving;
-        private float _horizontalPosition;
-        
+        private float _xAxis;
+
         private Vector3 Position => transform.position;
 
         private void Start()
         {
             _defaultPosition = Position;
-            FollowCamera.OnSetFollowTarget(transform);
+            
+            var cam = FindObjectOfType<FollowCamera>();
+            cam.SetTarget(transform);
         }
+
+        public void SetGrid(GridMesh grid) => _grid = grid;
 
         IEnumerator PerformMoving()
         {
-            grid.BeginMessing();
-            
+            _grid.BeginMessing();
+
             while (_isMoving)
             {
                 var pos = Position;
                 var fall = Time.deltaTime * fallSpeed;
                 pos.y -= fall;
 
+                _xAxis = Input.GetAxisRaw("Mouse X") * mouseSpeed * Time.deltaTime;
                 if (pos.y < -yBorder)
                 {
                     pos.y = -yBorder;
@@ -42,21 +46,21 @@ namespace Grid
                 }
 
                 transform.position = pos;
-                
+
                 // updating grid pixels
-                grid.UpdatePixels(pos.y, _horizontalPosition);
-                
+                _grid.UpdatePixels(_xAxis, pos.y);
+
                 // Updating ui
-                LevelSlider.Instance.SetFill(Mathf.Abs(pos.y),yBorder);
+                LevelSlider.Instance.SetFill(Mathf.Abs(pos.y), yBorder);
                 yield return null;
             }
         }
 
         public void Stop(bool resetPosition)
         {
+            if (resetPosition) Reset();
             if (!_isMoving) return;
             _isMoving = false;
-            if(resetPosition) Reset();
         }
 
         public void Activate()
@@ -64,18 +68,13 @@ namespace Grid
             if (!_isMoving)
             {
                 // begin level
-                
+
                 _isMoving = true;
 
                 Reset();
-                
+
                 StartCoroutine(PerformMoving());
             }
-        }
-
-        public void SetHorizontalPosition(float horPos)
-        {
-            _horizontalPosition = horPos;
         }
 
         private void Reset()

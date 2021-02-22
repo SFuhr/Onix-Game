@@ -307,7 +307,7 @@ MonoBehaviour:
     star: {fileID: 8911770206990330317, guid: 2cfa93834ab5b9b44b843d256807731e, type: 3}
     itemLayer:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 1024
 --- !u!1 &1553658986
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,9 +445,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 900bed16dbf642cf87d38e243aff8064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseSpeed: 200
   fallSpeed: 8
   yBorder: 100
-  grid: {fileID: 1550092560}
 --- !u!1 &1791524042
 GameObject:
   m_ObjectHideFlags: 0

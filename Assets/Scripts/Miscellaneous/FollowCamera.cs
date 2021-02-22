@@ -8,23 +8,20 @@ namespace Miscellaneous
         [Header("Follow Settings")]
         [SerializeField] [Range(0, 10)] private float speed = 1f;
         [SerializeField] private float yOffset;
-        [SerializeField] private bool ignoreX = true;
+        [SerializeField] private bool ignoreTargetX = true;
         [SerializeField] private float yLowestPoint = -100;
         
         private Transform _target;
+        private float _xOffset;
         
-        private static Action<Transform> _setFollowTarget;
-        public static void OnSetFollowTarget(Transform target) => _setFollowTarget?.Invoke(target);
         private bool TargetExists => _target != null;
         private float ZPos => transform.position.z;
         private Vector3 Position => transform.position;
-        
-        private void OnEnable()
+
+        public void SetTarget(Transform target)
         {
-            // smooth start camera effect
-            transform.position = new Vector3(Position.x,0,Position.z);
-            
-            _setFollowTarget += target => _target = target;
+            _target = target;
+            _xOffset = _target.position.x;
         }
 
         public void LateUpdate()
@@ -34,7 +31,7 @@ namespace Miscellaneous
             var targetPosition = _target.position;
             
             targetPosition.y += yOffset;
-            targetPosition.x = ignoreX ? Position.x : targetPosition.x;
+            targetPosition.x = ignoreTargetX ? Position.x : targetPosition.x + _xOffset;
             targetPosition.y = targetPosition.y < yLowestPoint ? yLowestPoint : targetPosition.y;
             
             var distance = Vector2.Distance(Position, targetPosition) * speed;

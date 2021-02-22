@@ -8,11 +8,11 @@
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
           <e p="Grid" t="Include">
-            <e p="MeshGrid.cs" t="Include" />
+            <e p="GridMesh.cs" t="Include" />
             <e p="Mover.cs" t="Include" />
           </e>
           <e p="Items" t="Include">
-            <e p="ItemBase.cs" t="Include" />
+            <e p="BaseItem.cs" t="Include" />
             <e p="ItemsManager.cs" t="Include" />
             <e p="IUsable.cs" t="Include" />
             <e p="Ruby.cs" t="Include" />
@@ -26,7 +26,6 @@
             <e p="FollowCamera.cs" t="Include" />
           </e>
           <e p="Player" t="Include">
-            <e p="InputController.cs" t="Include" />
             <e p="Score.cs" t="Include" />
           </e>
           <e p="UI" t="Include">
@@ -66,7 +65,6 @@
             <e p="EmojiOne Attribution.txt" t="Include" />
           </e>
         </e>
-        <e p="TODO.txt" t="Include" />
       </e>
       <e p="obj" t="ExcludeRecursive" />
       <e p="Onix-Game.sln" t="IncludeFlat" />

@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 namespace Grid
 {
-    public class MeshGrid : MonoBehaviour
+    public class GridMesh : MonoBehaviour
     {
         [Header("Tear")] [Tooltip("Percentage of texture's width")] [SerializeField] [Range(1, 100)]
         private int tearStartSize = 10;
@@ -43,7 +43,8 @@ namespace Grid
         private Renderer _renderer;
         private Texture2D _texture;
         private Color _colorEmpty;
-        private float _horizontalMoveValue;
+        private float _expectedHorizontalStep;
+        private int _horizontalMoveValue;
         private int _moverFirstPoint;
         private int _currentLine;
         private int _spreadReady;
@@ -53,6 +54,7 @@ namespace Grid
         private int _rubiesAcquired;
         private bool _messyGrid;
         private bool _improvedSpreadEnabled;
+        private bool _hasActiveCells;
 
         private const int RubySpreadRubiesNeeded = 3;
         private int Width => _texture.width;
@@ -194,9 +196,10 @@ namespace Grid
             var texture = possibleObjects[Random.Range(0, possibleObjects.Length)];
             var pixels = texture.GetPixels();
 
+            // rotating pixels array by 180 degrees, in order to match its png
             var a = 0;
             var b = pixels.Length - 1;
-            
+
             while (a < b)
             {
                 var temp = pixels[a];
@@ -206,28 +209,6 @@ namespace Grid
                 a++;
                 b--;
             }
-
-            // flip the texture with 50% chance
-            // if (Random.Range(0, 100) < 50)
-            // {
-            //     var textureHeight = texture.height;
-            //     var textureWidth = texture.width;
-            //
-            //     for (int i = 0; i < textureHeight; i++)
-            //     {
-            //         a = 0;
-            //         b = textureWidth - 1;
-            //
-            //         while (a < b)
-            //         {
-            //             var hold = pixels[(i * textureHeight) + (a)];
-            //             pixels[(i * textureHeight) + (a)] = pixels[(i * textureHeight) + (b)];
-            //             pixels[(i * textureHeight) + (b)] = hold;
-            //             a++;
-            //             b--;
-            //         }
-            //     }
-            // }
 
             for (int y = 0; y < texture.height; y++)
             {
@@ -313,10 +294,12 @@ namespace Grid
             return vec;
         }
 
-        public void UpdatePixels(float moverYPos, float x)
+        public void UpdatePixels(float moverXPos, float moverYPos)
         {
             if (!_messyGrid) return;
-            _horizontalMoveValue += x;
+
+            _expectedHorizontalStep += moverXPos;
+            var newHorizontal = (int) Mathf.Round(_expectedHorizontalStep);
 
             var y = Mathf.Abs(Mathf.Round(Mathf.Min(1, moverYPos * updateAccuracy)));
             var expectedLine = (int) (Height * (y / (updateAccuracy * 100)));
@@ -324,13 +307,13 @@ namespace Grid
             if (_currentLine >= expectedLine) return;
             if (_currentLine >= Height) return;
 
-            UpdateTearCells(expectedLine);
+            UpdateTearCells(expectedLine, newHorizontal);
         }
 
-        private void UpdateTearCells(int expectedLine)
+        private void UpdateTearCells(int expectedLine, int horizontal)
         {
             // changing the grid map
-            var hasActiveCells = false;
+            _hasActiveCells = false;
             for (int y = _currentLine; y < expectedLine; y++, _currentLine++)
             {
                 // define if the tear is spreading this time
@@ -349,8 +332,7 @@ namespace Grid
                     {
                         if (_grid[x, y - 1] == 1)
                         {
-                            _grid[x, y] = 1;
-                            hasActiveCells = true;
+                            FillCell(x,y);
                         }
                         else _grid[x, y] = 0;
                     }
@@ -359,8 +341,7 @@ namespace Grid
                     {
                         if (_grid[x, y - 1] == 0 && (_grid[x - 1, y - 1] == 1 || _grid[x + 1, y - 1] == 1))
                         {
-                            _grid[x, y] = 1;
-                            hasActiveCells = true;
+                            FillCell(x,y);
                         }
                     }
 
@@ -369,31 +350,39 @@ namespace Grid
                 }
             }
 
-            // changing the x position
-            if (Mathf.Abs(_horizontalMoveValue) > 0)
+            if (_horizontalMoveValue != horizontal)
             {
-                var xSteps = (int)Mathf.Round(_horizontalMoveValue);
-                _horizontalMoveValue = 0;
-                
-                TearSideMover(xSteps);
+                TearSideMover(horizontal);
             }
 
             ApplyTexture();
 
-            if (!hasActiveCells)
+            if (!_hasActiveCells)
             {
                 // no active tears left, level is lost
-                LevelManager.OnLevelEnded(false);
+                LevelManager.OnLevelEnd(false);
             }
         }
 
-        private void TearSideMover(int xAxis)
+        private void FillCell(int x, int y)
         {
-            var y = _currentLine - 1;
+            if(!_hasActiveCells) _hasActiveCells = true;
+            
+            _grid[x, y] = 1;
+            itemsManager.PrepareToScan(GridToWorldPosition(x, y));
+        }
 
-            for (int i = 0; i < Mathf.Abs(xAxis); i++)
+        private void TearSideMover(int moverXPos)
+        {
+            var difference = _horizontalMoveValue - moverXPos;
+            _horizontalMoveValue = moverXPos;
+
+            var y = _currentLine - 1;
+            difference *= -1;
+
+            for (int i = 0; i < Mathf.Abs(difference); i++)
             {
-                if (xAxis > 0) // moving right 
+                if (difference > 0) // moving right 
                 {
                     for (int x = 1; x < Width - 1; x++)
                     {
@@ -413,11 +402,6 @@ namespace Grid
                         _grid[x - 1, y] = 0;
                     }
                 }
-            }
-
-            for (int x = 0; x < Width; x++)
-            {
-                UpdateCellColor(x, y, false);
             }
         }
 
@@ -444,17 +428,6 @@ namespace Grid
                 if (x - 1 <= 0 || !CellIsFilled(x - 1, y)) return;
 
                 _colors[colorIndex] = ColorBorder;
-                // for (int i = 0; i < 2; i++)
-                // {
-                //     if (x - i > 0)
-                //     {
-                //         _colors[colorIndex + i] = ColorBorder;
-                //     }
-                //     else
-                //     {
-                //         return;
-                //     }
-                // }
             }
             else
             {

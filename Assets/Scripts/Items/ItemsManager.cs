@@ -13,15 +13,19 @@ namespace Items
         [SerializeField] private Star star;
         [SerializeField] private LayerMask itemLayer;
 
-        private List<ItemBase> _activeItems;
+        private List<BaseItem> _activeItems;
+        private Vector3[] _pointsToScan;
+        private int _scanId;
         private Collider[] _scanResult;
 
-        private const byte RubyId = 3;
-        private const byte StarId = 4;
+        private const int PointsNeeded = 2;
+        private const int RubyId = 3;
+        private const int StarId = 4;
 
         public void Initialize()
         {
-            _activeItems = new List<ItemBase>();
+            _activeItems = new List<BaseItem>();
+            _pointsToScan = new Vector3[PointsNeeded];
             
             // we can't have more than 10 items per row, so this array has a capacity of 10
             _scanResult = new Collider[10];
@@ -40,16 +44,16 @@ namespace Items
             }
         }
 
-        private void InstantiateItem(ItemBase item, Vector3 pos)
+        private void InstantiateItem(BaseItem baseItem, Vector3 pos)
         {
-            var newItem = Object.Instantiate(item, pos, Quaternion.identity);
+            var newItem = Object.Instantiate(baseItem, pos, Quaternion.identity);
             _activeItems.Add(newItem);
         }
 
-        private void RemoveSpecificItem(ItemBase item)
+        private void RemoveSpecificItem(BaseItem baseItem)
         {
-            if (!_activeItems.Contains(item)) return;
-            _activeItems.Remove(item);
+            if (!_activeItems.Contains(baseItem)) return;
+            _activeItems.Remove(baseItem);
         }
 
         public void WipeActiveItems()
@@ -58,19 +62,48 @@ namespace Items
 
             foreach (var item in _activeItems)
             {
-                item.Remove();
+                item.Destroy();
             }
             _activeItems.Clear();
         }
 
-        public void ScanForItemsByBounds(Bounds bounds)
+        private void UseAndRemoveItem(IUsable usable)
         {
-            if (Physics.OverlapBoxNonAlloc(bounds.center, bounds.extents / 2, _scanResult,Quaternion.identity, itemLayer) <= 0) return;
+            usable.Use();
+            _activeItems.Remove(usable.GetItem());
+            usable.Destroy();
+        }
 
-            foreach (var col in _scanResult)
+        private void ScanForItemsByBounds(Vector3 center, Vector3 extends)
+        {
+            if (Physics.OverlapBoxNonAlloc(center, extends * 0.5f, _scanResult,Quaternion.identity, itemLayer) <= 0) return;
+
+            for (int i = 0; i < _scanResult.Length; i++)
             {
-                if (!col.TryGetComponent(out ItemBase item)) continue;
-                item.Use();
+                var col = _scanResult[i];
+                if (col == null) return;
+
+                if (!col.TryGetComponent(out IUsable usable)) continue;
+                UseAndRemoveItem(usable);
+            }
+        }
+
+        public void PrepareToScan(Vector3 pos)
+        {
+            _pointsToScan[_scanId] = pos;
+            
+            _scanId++;
+            if (_scanId >= PointsNeeded)
+            {
+                _scanId = 0;
+
+                var scale = _pointsToScan[1] - _pointsToScan[0];
+                scale.x = Mathf.Abs(scale.x);
+                scale.y = Mathf.Abs(scale.y);
+                scale.z = Mathf.Abs(scale.z);
+                var center = (_pointsToScan[1] + _pointsToScan[0]) * 0.5f;
+                
+                ScanForItemsByBounds(center,scale);
             }
         }
     }

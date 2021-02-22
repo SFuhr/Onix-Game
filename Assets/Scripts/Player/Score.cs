@@ -8,8 +8,8 @@ namespace Player
     {
         private int _score;
 
-        public static Action<ItemBase> ItemAcquired;
-        public static void OnItemAcquired(ItemBase item) => ItemAcquired?.Invoke(item);
+        public static Action<BaseItem> ItemAcquired;
+        public static void OnItemAcquired(BaseItem baseItem) => ItemAcquired?.Invoke(baseItem);
 
         private void Awake()
         {

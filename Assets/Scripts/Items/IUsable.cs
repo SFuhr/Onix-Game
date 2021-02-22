@@ -2,7 +2,8 @@
 {
     public interface IUsable
     {
+        BaseItem GetItem();
         void Use();
-        void Remove();
+        void Destroy();
     }
 }

@@ -3,9 +3,9 @@
 namespace Items
 {
     [AddComponentMenu("Pickup/Star")]
-    public class Star : ItemBase
+    public class Star : BaseItem
     {
-        public override void Use()
+        protected override void UseActions()
         {
             
         }

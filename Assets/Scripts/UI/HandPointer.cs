@@ -19,12 +19,12 @@ namespace UI
             _basePos = transform.position;
             _cameraTransform = Camera.main.transform;
             
-            LevelManager.LevelStarted += () =>
+            LevelManager.LevelStart += () =>
             {
                 _activated = true;
                 if(_animator != null) _animator.SetTrigger(ShowPointer);
             };
-            LevelManager.LevelEnded += success => _activated = false;
+            LevelManager.LevelEnd += success => _activated = false;
         }
 
         private void Update()
