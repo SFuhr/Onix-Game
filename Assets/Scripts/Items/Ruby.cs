@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Grid;
+using UnityEngine;
 
 namespace Items
 {
@@ -7,7 +8,9 @@ namespace Items
     {
         protected override void UseActions()
         {
-            
+            // var grid = FindObjectOfType<GridMesh>();
+            // grid.RubyAcquired();
+            GridMesh.Instance.RubyAcquired();
         }
     }
 }

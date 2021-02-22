@@ -65,8 +65,21 @@ namespace Grid
         private Color ColorBorder => borderColor;
         private Color ColorPickupRuby => Color.blue;
         private Color ColorPickupStar => Color.green;
-
         public bool IsMessy => _messyGrid;
+
+        public static GridMesh Instance;
+
+        private void OnEnable()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else if (Instance != this)
+            {
+                Destroy(gameObject);
+            }
+        }
 
         public void Initialize()
         {
@@ -278,6 +291,9 @@ namespace Grid
 
             itemsManager.WipeActiveItems();
 
+            _rubiesAcquired = 0;
+            _improvedSpreadEnabled = false;
+            _hasActiveCells = false;
             _messyGrid = false;
         }
 
@@ -305,7 +321,11 @@ namespace Grid
             var expectedLine = (int) (Height * (y / (updateAccuracy * 100)));
 
             if (_currentLine >= expectedLine) return;
-            if (_currentLine >= Height) return;
+            if (_currentLine >= Height)
+            {
+                if (_hasActiveCells) LevelManager.OnLevelEnd(true);
+                return;
+            }
 
             UpdateTearCells(expectedLine, newHorizontal);
         }
@@ -332,7 +352,7 @@ namespace Grid
                     {
                         if (_grid[x, y - 1] == 1)
                         {
-                            FillCell(x,y);
+                            FillCell(x, y);
                         }
                         else _grid[x, y] = 0;
                     }
@@ -341,7 +361,7 @@ namespace Grid
                     {
                         if (_grid[x, y - 1] == 0 && (_grid[x - 1, y - 1] == 1 || _grid[x + 1, y - 1] == 1))
                         {
-                            FillCell(x,y);
+                            FillCell(x, y);
                         }
                     }
 
@@ -350,11 +370,22 @@ namespace Grid
                 }
             }
 
+            // move tear horizontally
             if (_horizontalMoveValue != horizontal)
             {
                 TearSideMover(horizontal);
             }
 
+            // check if fast spread must be stopped
+            if (_improvedSpreadEnabled)
+            {
+                if (_grid[0, _currentLine - 1] == 1 || _grid[Width - 1, _currentLine - 1] == 1)
+                {
+                    _improvedSpreadEnabled = false;
+                }
+            }
+
+            // apply colors to the texture
             ApplyTexture();
 
             if (!_hasActiveCells)
@@ -366,8 +397,8 @@ namespace Grid
 
         private void FillCell(int x, int y)
         {
-            if(!_hasActiveCells) _hasActiveCells = true;
-            
+            if (!_hasActiveCells) _hasActiveCells = true;
+
             _grid[x, y] = 1;
             itemsManager.PrepareToScan(GridToWorldPosition(x, y));
         }

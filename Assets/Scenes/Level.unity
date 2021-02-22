@@ -279,7 +279,7 @@ MonoBehaviour:
   tearFinalSize: 80
   tearStartHeight: 24
   updateAccuracy: 100
-  improvedSpreadValue: 4
+  improvedSpreadValue: 10
   tearColor: {r: 0, g: 0, b: 0, a: 0}
   randomColorRange: 0.9
   useColorBorder: 1
@@ -296,15 +296,23 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 59024917a9a1d8a4c990c5e8a1b45449, type: 3}
   - {fileID: 2800000, guid: cce436d2395e54242a6dda43e366a55a, type: 3}
   - {fileID: 2800000, guid: c62fb47896e91704d917d2be8ce03cb3, type: 3}
+  - {fileID: 2800000, guid: bf27d4a34f684c34faebffbf8a97d0f0, type: 3}
   pickupTexture:
   - {fileID: 2800000, guid: f4c1c0136bba5ba48914a7f0d841877d, type: 3}
   - {fileID: 2800000, guid: 1f950c15768dfb74ab0c62a7dc14b508, type: 3}
   - {fileID: 2800000, guid: 9444b5135253b6b45ae0d8ba6be4def3, type: 3}
   - {fileID: 2800000, guid: f7c3b82b814af30458be15c2aba75a9b, type: 3}
+  - {fileID: 2800000, guid: cd86a9c9eae6d3643b7bc0e315eb2669, type: 3}
+  - {fileID: 2800000, guid: 49ab0f932db01644383dfee8201a6ea3, type: 3}
+  - {fileID: 2800000, guid: 84c9a958df18bd64a9b3d2cb9e1bdb20, type: 3}
+  - {fileID: 2800000, guid: 946000918edd2884a8a3a4e825c2c645, type: 3}
   pickupSpawnChance: 70
   itemsManager:
     ruby: {fileID: 5584332586014635632, guid: 6dcc64ba06bb0c048ae567995aa8cb86, type: 3}
-    star: {fileID: 8911770206990330317, guid: 2cfa93834ab5b9b44b843d256807731e, type: 3}
+    stars:
+    - {fileID: 8911770206990330317, guid: 2cfa93834ab5b9b44b843d256807731e, type: 3}
+    - {fileID: 8911770206990330317, guid: 737a733abcd249a4299159e4e67591b4, type: 3}
+    bigStarSpawnChance: 20
     itemLayer:
       serializedVersion: 2
       m_Bits: 1024

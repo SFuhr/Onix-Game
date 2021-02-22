@@ -16,8 +16,8 @@ namespace UI
         {
             _animator = GetComponent<Animator>();
 
-            LevelManager.LevelStart += () => _animator.SetBool(Show,false);
-            LevelManager.LevelEnd += b => _animator.SetBool(Show,true);
+            LevelManager.LevelStarted += () => _animator.SetBool(Show,false);
+            LevelManager.LevelEnded += b => _animator.SetBool(Show,true);
         }
 
         public void ButtonStartLevel()

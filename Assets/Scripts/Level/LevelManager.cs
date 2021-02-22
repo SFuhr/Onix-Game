@@ -12,10 +12,10 @@ namespace Level
 
         [SerializeField] private Mover mover;
 
-        public static Action LevelStart;
-        public static void OnLevelStart() => LevelStart?.Invoke();
-        public static Action<bool> LevelEnd;
-        public static void OnLevelEnd(bool success) => LevelEnd?.Invoke(success);
+        public static Action LevelStarted;
+        public static void OnLevelStart() => LevelStarted?.Invoke();
+        public static Action<bool> LevelEnded;
+        public static void OnLevelEnd(bool success) => LevelEnded?.Invoke(success);
 
         public static Action LevelReset;
         public static void OnLevelReset() => LevelReset?.Invoke();
@@ -54,7 +54,7 @@ namespace Level
 
         private void SetEvents()
         {
-            LevelStart += () =>
+            LevelStarted += () =>
             {
                 // Debug.Log($"Level just started...");
                 Cursor.lockState = CursorLockMode.Locked;
@@ -63,7 +63,7 @@ namespace Level
                 if (grid.IsMessy) grid.ResetGrid();
                 mover.Activate();
             };
-            LevelEnd += success =>
+            LevelEnded += success =>
             {
                 // var win = success ? "Win!" : "Lose :(";
                 // Debug.Log($"Level ended as {win}");

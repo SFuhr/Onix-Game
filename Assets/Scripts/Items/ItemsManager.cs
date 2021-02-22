@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Level;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace Items
 {
@@ -10,7 +11,8 @@ namespace Items
     public class ItemsManager
     {
         [SerializeField] private Ruby ruby;
-        [SerializeField] private Star star;
+        [SerializeField] private Star[] stars;
+        [SerializeField] [Range(0, 100)] private float bigStarSpawnChance = 20;
         [SerializeField] private LayerMask itemLayer;
         [SerializeField] private Explosion explosion;
 
@@ -40,7 +42,8 @@ namespace Items
                     InstantiateItem(ruby,worldPosition);
                     break;
                 case StarId:
-                    InstantiateItem(star,worldPosition);
+                    var id = Random.Range(0, 100) < bigStarSpawnChance ? 1 : 0;
+                    InstantiateItem(stars[id],worldPosition);
                     break;
             }
         }

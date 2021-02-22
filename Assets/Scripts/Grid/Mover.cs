@@ -61,6 +61,7 @@ namespace Grid
             if (resetPosition) Reset();
             if (!_isMoving) return;
             _isMoving = false;
+            StopAllCoroutines();
         }
 
         public void Activate()

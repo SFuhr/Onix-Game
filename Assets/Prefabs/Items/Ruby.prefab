@@ -60,7 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fallSpeed: 17
   col: {fileID: 2390744844775847031}
-  lifetimeAfterUse: 1.5
+  lifetimeAfterUse: 0
 --- !u!1001 &2390744846536644677
 PrefabInstance:
   m_ObjectHideFlags: 0

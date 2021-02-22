@@ -5,13 +5,11 @@ namespace Items
 {
     public abstract class BaseItem : MonoBehaviour, IUsable
     {
-        [SerializeField] [Min(0)] private float fallSpeed = 9f;
+        [SerializeField] [Min(0)] private Vector2 fall;
         [SerializeField] private Collider col;
         [SerializeField] private float lifetimeAfterUse = 1.5f;
 
         private bool _used;
-
-        private static readonly int Used = Animator.StringToHash("Used");
 
         public BaseItem GetItem() => this;
         public Vector3 Position() => transform.position;
@@ -37,7 +35,9 @@ namespace Items
             while (timer > 0)
             {
                 var pos = transform.position;
-                pos.y -= fallSpeed * Time.deltaTime;
+                pos.y -= fall.y * Time.deltaTime;
+                pos.x -= Random.Range(0, fall.x) * Time.deltaTime;
+                
                 transform.position = pos;
 
                 timer -= Time.deltaTime;
