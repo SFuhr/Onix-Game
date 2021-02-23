@@ -62,7 +62,7 @@ namespace Items
 
         public void WipeActiveItems()
         {
-            _scanId = 0;
+            ResetScan();
             if (_activeItems.Count == 0) return;
 
             foreach (var item in _activeItems)
@@ -94,6 +94,11 @@ namespace Items
                 if (!col.TryGetComponent(out IUsable usable)) continue;
                 UseAndRemoveItem(usable);
             }
+        }
+
+        public void ResetScan()
+        {
+            _scanId = 0;
         }
 
         public void PrepareToScan(Vector3 pos)

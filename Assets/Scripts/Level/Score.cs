@@ -70,11 +70,9 @@ namespace Level
                     data = save;
                     
                     _file.Close();
-                    
-                    UpdateUiScore();
                 }
-                
             }
+            UpdateUiScore();
             ProgressBar.Instance.SetCurrentLevel(data.GetLevel);
         }
 

@@ -311,11 +311,6 @@ namespace Grid
             var expectedLine = (int) (Height * (y / (updateAccuracy * 100)));
 
             if (_currentLine >= expectedLine) return;
-            if (_currentLine >= Height)
-            {
-                if (_hasActiveCells) LevelManager.OnLevelEnd(true);
-                return;
-            }
 
             UpdateTearCells(expectedLine, newHorizontal);
         }
@@ -336,6 +331,7 @@ namespace Grid
                     _spreadReady = !_improvedSpreadEnabled ? _spreadEachLines : _spreadEachLinesImproved;
                 }
 
+                itemsManager.ResetScan();
                 for (int x = 0; x < Width; x++)
                 {
                     if (_grid[x, y] == 0 || _grid[x, y] == 1)
@@ -437,9 +433,8 @@ namespace Grid
         private void UpdateCellColor(int x, int y, bool updateEmpty)
         {
             var colorIndex = y * Width + x;
-            var cell = _grid[x, y];
 
-            if (cell == 0)
+            if (!CellIsFilled(x,y))
             {
                 if (updateEmpty)
                 {

@@ -297,6 +297,9 @@ MonoBehaviour:
   - {fileID: 2800000, guid: cce436d2395e54242a6dda43e366a55a, type: 3}
   - {fileID: 2800000, guid: c62fb47896e91704d917d2be8ce03cb3, type: 3}
   - {fileID: 2800000, guid: bf27d4a34f684c34faebffbf8a97d0f0, type: 3}
+  - {fileID: 2800000, guid: 184a8d39a3af3874ba5642084f4d2cef, type: 3}
+  - {fileID: 2800000, guid: 571765c93e5dcd84dac11d007694011e, type: 3}
+  - {fileID: 2800000, guid: 5aa29fe8f80bc6d4883406e6926941b9, type: 3}
   pickupTexture:
   - {fileID: 2800000, guid: f4c1c0136bba5ba48914a7f0d841877d, type: 3}
   - {fileID: 2800000, guid: 1f950c15768dfb74ab0c62a7dc14b508, type: 3}

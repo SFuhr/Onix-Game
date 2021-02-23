@@ -6,18 +6,33 @@ namespace Level
 {
     public class LevelManager : MonoBehaviour
     {
-        [Header("Grid & Mover")] [SerializeField]
-        private GridMesh grid;
-
+        [Header("Grid & Mover")]
+        [SerializeField] private GridMesh grid;
         [SerializeField] private Mover mover;
+
+        private static bool LevelIsRunning;
 
         public static Action LevelLoaded;
         private static void OnLevelLoaded() => LevelLoaded?.Invoke();
         
         public static Action LevelStarted;
-        public static void OnLevelStart() => LevelStarted?.Invoke();
+
+        public static void OnLevelStart()
+        {
+            if (LevelIsRunning) return;
+            
+            LevelIsRunning = true;
+            LevelStarted?.Invoke();
+        }
         public static Action<bool> LevelEnded;
-        public static void OnLevelEnd(bool success) => LevelEnded?.Invoke(success);
+
+        public static void OnLevelEnd(bool success)
+        {
+            if (!LevelIsRunning) return;
+
+            LevelIsRunning = false;
+            LevelEnded?.Invoke(success);
+        }
 
         private void Start()
         {

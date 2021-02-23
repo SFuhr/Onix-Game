@@ -49,7 +49,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Grid/ItemsManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/InputController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Grid/MeshGrid.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UI/WorldUi.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Miscellaneous/FollowCamera.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Items/ItemBase.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Items/ItemAbstract.cs" />
@@ -60,13 +59,14 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/LevelSlider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Level/Boot.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/Score.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Level/LevelManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Items/ItemsManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/Mover.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/GridMesh.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Items/Ruby.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UI/RubyCounter.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Items/ItemsManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/WorldUi.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Level/Score.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/Mover.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Level/LevelManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/GridMesh.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/RubyCounter.cs" />
       </list>
     </option>
   </component>
@@ -158,7 +158,10 @@
       <workItem from="1614047266795" duration="10396000" />
       <workItem from="1614065055612" duration="382000" />
       <workItem from="1614065547662" duration="1138000" />
-      <workItem from="1614066765553" duration="170000" />
+      <workItem from="1614066765553" duration="294000" />
+      <workItem from="1614067243510" duration="1126000" />
+      <workItem from="1614068981460" duration="397000" />
+      <workItem from="1614069459799" duration="647000" />
     </task>
     <servers />
   </component>
