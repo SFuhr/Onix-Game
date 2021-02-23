@@ -16,8 +16,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Platform/Platform.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Platform/PlatformBrain.cs" />
         <option value="$PROJECT_DIR$/Assets/Shaders/Grid.shader" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Platform/PlatformElement.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Cameras/FollowCamera.cs" />
@@ -43,7 +41,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/Ruby.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/MainCanvas.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/MainUi.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UI/LevelSlider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/BasePickup.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/IPickable.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/IUsable.cs" />
@@ -53,20 +50,23 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/InputController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Grid/MeshGrid.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/WorldUi.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Level/LevelManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Level/Boot.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Miscellaneous/FollowCamera.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Items/ItemBase.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Items/ItemAbstract.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Items/Explosion.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Items/IUsable.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Items/ItemsManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/Mover.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Items/BaseItem.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Items/Star.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/LevelSlider.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Level/Boot.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/Score.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Items/Ruby.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Level/LevelManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Items/ItemsManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Grid/Mover.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Grid/GridMesh.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Items/Ruby.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/RubyCounter.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Level/Score.cs" />
       </list>
     </option>
   </component>
@@ -79,7 +79,7 @@
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.C#" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -152,6 +152,13 @@
       <workItem from="1613780358569" duration="10897000" />
       <workItem from="1613862014375" duration="1181000" />
       <workItem from="1613915474651" duration="34760000" />
+      <workItem from="1613985409355" duration="324000" />
+      <workItem from="1614029602727" duration="2411000" />
+      <workItem from="1614040539509" duration="596000" />
+      <workItem from="1614047266795" duration="10396000" />
+      <workItem from="1614065055612" duration="382000" />
+      <workItem from="1614065547662" duration="1138000" />
+      <workItem from="1614066765553" duration="170000" />
     </task>
     <servers />
   </component>
@@ -168,10 +175,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="727" y="244" key="RiderGenerateDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1613975328157" />
-    <state x="590" y="204" width="998" height="708" key="SettingsEditor" timestamp="1605955715450">
+    <state x="590" y="204" width="998" height="708" key="SettingsEditor" timestamp="1614060808485">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="590" y="204" width="998" height="708" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1605955715450" />
+    <state x="590" y="204" width="998" height="708" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1614060808485" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1613787324542">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

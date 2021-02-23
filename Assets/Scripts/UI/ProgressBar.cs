@@ -1,18 +1,19 @@
 ﻿using System;
+using Level;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI
 {
-    public class LevelSlider : MonoBehaviour
+    public class ProgressBar : MonoBehaviour
     {
-        [SerializeField] private TextMeshPro levelCurrent;
-        [SerializeField] private TextMeshPro levelNext;
+        [SerializeField] private TextMeshProUGUI levelCurrent;
+        [SerializeField] private TextMeshProUGUI levelNext;
         [SerializeField] private Image slider;
         [SerializeField] [Range(1, 1000)] private float accuracy = 100;
 
-        public static LevelSlider Instance;
+        public static ProgressBar Instance;
 
         private int _fillValue;
 
@@ -22,7 +23,16 @@ namespace UI
             {
                 Instance = this;
             }
-            else Destroy(gameObject);
+            else if (Instance != this)
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        public void SetCurrentLevel(int level)
+        {
+            levelCurrent.text = level.ToString();
+            levelNext.text = (level + 1).ToString();
         }
 
         public void SetFill(float current, float max)

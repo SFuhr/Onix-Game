@@ -22,16 +22,15 @@
           <e p="Level" t="Include">
             <e p="Boot.cs" t="Include" />
             <e p="LevelManager.cs" t="Include" />
+            <e p="Score.cs" t="Include" />
           </e>
           <e p="Miscellaneous" t="Include">
             <e p="FollowCamera.cs" t="Include" />
           </e>
-          <e p="Player" t="Include">
-            <e p="Score.cs" t="Include" />
-          </e>
           <e p="UI" t="Include">
             <e p="HandPointer.cs" t="Include" />
-            <e p="LevelSlider.cs" t="Include" />
+            <e p="ProgressBar.cs" t="Include" />
+            <e p="RubyCounter.cs" t="Include" />
             <e p="WorldUi.cs" t="Include" />
           </e>
         </e>

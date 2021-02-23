@@ -62,6 +62,7 @@ namespace Items
 
         public void WipeActiveItems()
         {
+            _scanId = 0;
             if (_activeItems.Count == 0) return;
 
             foreach (var item in _activeItems)

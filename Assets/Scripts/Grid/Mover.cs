@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Level;
 using Miscellaneous;
 using UI;
 using UnityEngine;
@@ -39,6 +40,7 @@ namespace Grid
                 pos.y -= fall;
 
                 _xAxis = Input.GetAxisRaw("Mouse X") * mouseSpeed * Time.deltaTime;
+                
                 if (pos.y < -yBorder)
                 {
                     pos.y = -yBorder;
@@ -50,36 +52,43 @@ namespace Grid
                 // updating grid pixels
                 _grid.UpdatePixels(_xAxis, pos.y);
 
+                ProgressBar.Instance.SetFill(Mathf.Abs(pos.y), yBorder);
                 // Updating ui
-                LevelSlider.Instance.SetFill(Mathf.Abs(pos.y), yBorder);
                 yield return null;
             }
+            LevelManager.OnLevelEnd(true);
+            
+            // resetting progress slider
+            ProgressBar.Instance.SetFill(0, 1);
         }
 
-        public void Stop(bool resetPosition)
+        public void Stop()
         {
-            if (resetPosition) Reset();
             if (!_isMoving) return;
             _isMoving = false;
-            StopAllCoroutines();
         }
-
+        
         public void Activate()
         {
+            Reset();
             if (!_isMoving)
             {
                 // begin level
 
                 _isMoving = true;
-
-                Reset();
-
+                
+                StopAllCoroutines();
                 StartCoroutine(PerformMoving());
             }
         }
 
-        private void Reset()
+        public void Reset()
         {
+            if (_isMoving)
+            {
+                StopAllCoroutines();
+                _isMoving = false;
+            }
             transform.position = _defaultPosition;
         }
     }

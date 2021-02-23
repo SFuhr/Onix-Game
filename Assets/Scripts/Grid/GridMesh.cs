@@ -1,4 +1,5 @@
-﻿using Level;
+﻿using System;
+using Level;
 using Items;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -7,31 +8,31 @@ namespace Grid
 {
     public class GridMesh : MonoBehaviour
     {
-        [Header("Tear")] [Tooltip("Percentage of texture's width")] [SerializeField] [Range(1, 100)]
-        private int tearStartSize = 10;
+        [Header("Tear")]
+        [Tooltip("Percentage of texture's width")]
+        [SerializeField] [Range(1, 100)] private int tearStartSize = 10;
 
         [SerializeField] [Range(1, 100)] private int tearFinalSize = 50;
         [SerializeField] [Min(1)] private int tearStartHeight = 8;
         [SerializeField] [Range(1, 1000)] private int updateAccuracy = 1000;
 
         [Tooltip("The total number of lines needed to spread is divided by this value when rubies effect is active.")]
-        [SerializeField]
-        [Range(1, 10)]
-        private int improvedSpreadValue = 4;
+        [SerializeField] [Range(1, 10)] private int improvedSpreadValue = 4;
 
-        [Header("Pixel Colors")] [SerializeField]
-        private Color tearColor = new Color(0, 0, 0, 0);
+        [Header("Pixel Colors")]
+        [SerializeField] private Color tearColor = new Color(0, 0, 0, 0);
 
         [SerializeField] [Range(0, 1)] private float randomColorRange = 0.85f;
         [SerializeField] private bool useColorBorder = true;
         [SerializeField] private Color borderColor = new Color(0, 0, 0, 1);
 
-        [Header("Obstacles")] [SerializeField] [Range(0, 100)]
-        private float obstacleSpawnChance = 30f;
+        [Header("Obstacles")]
+        [SerializeField] [Range(0, 100)] private float obstacleSpawnChance = 30f;
 
         [SerializeField] private Texture2D[] obstacleTexture;
 
-        [Header("Items")] [SerializeField] private Texture2D[] pickupTexture;
+        [Header("Items")]
+        [SerializeField] private Texture2D[] pickupTexture;
         [SerializeField] [Range(0, 100)] private float pickupSpawnChance;
         [SerializeField] private ItemsManager itemsManager;
 
@@ -67,18 +68,17 @@ namespace Grid
         private Color ColorPickupStar => Color.green;
         public bool IsMessy => _messyGrid;
 
-        public static GridMesh Instance;
-
         private void OnEnable()
         {
-            if (Instance == null)
+            Ruby.RubyAcquired += () =>
             {
-                Instance = this;
-            }
-            else if (Instance != this)
-            {
-                Destroy(gameObject);
-            }
+                _rubiesAcquired++;
+                if (_rubiesAcquired >= RubySpreadRubiesNeeded)
+                {
+                    _rubiesAcquired = 0;
+                    _improvedSpreadEnabled = true;
+                }
+            };
         }
 
         public void Initialize()
@@ -94,16 +94,6 @@ namespace Grid
         public void BeginMessing()
         {
             _messyGrid = true;
-        }
-
-        public void RubyAcquired()
-        {
-            _rubiesAcquired++;
-            if (_rubiesAcquired >= RubySpreadRubiesNeeded)
-            {
-                _rubiesAcquired = 0;
-                _improvedSpreadEnabled = true;
-            }
         }
 
         private void InitializeGrid()
@@ -130,10 +120,10 @@ namespace Grid
             _colorEmpty = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
 
             // calculating tear sizes and another very important calculations
-            var startSize = (int) Mathf.Round(Width * (tearStartSize * 0.01f));
+            var startSize = Mathf.RoundToInt(Width * (tearStartSize * 0.01f));
             if (startSize % 2 != 0) startSize++;
 
-            _tearFinalSize = (int) Mathf.Round(Width * (tearFinalSize * 0.01f));
+            _tearFinalSize = Mathf.RoundToInt(Width * (tearFinalSize * 0.01f));
             if (_tearFinalSize % 2 != 0) _tearFinalSize++;
             if (_tearFinalSize <= startSize) _tearFinalSize = startSize + 2;
 
@@ -142,7 +132,7 @@ namespace Grid
             _spreadEachLines = Height / ((_tearFinalSize - startSize) / 2);
             _spreadReady = _spreadEachLines;
 
-            _spreadEachLinesImproved = (int) Mathf.Round((float) _spreadEachLines / improvedSpreadValue);
+            _spreadEachLinesImproved = Mathf.RoundToInt((float) _spreadEachLines / improvedSpreadValue);
 
             // beginning of the tear
             var startPoint = Width / 2 - startSize / 2 + 1;
@@ -315,7 +305,7 @@ namespace Grid
             if (!_messyGrid) return;
 
             _expectedHorizontalStep += moverXPos;
-            var newHorizontal = (int) Mathf.Round(_expectedHorizontalStep);
+            var newHorizontal = Mathf.RoundToInt(_expectedHorizontalStep);
 
             var y = Mathf.Abs(Mathf.Round(Mathf.Min(1, moverYPos * updateAccuracy)));
             var expectedLine = (int) (Height * (y / (updateAccuracy * 100)));
@@ -381,6 +371,7 @@ namespace Grid
             {
                 if (_grid[0, _currentLine - 1] == 1 || _grid[Width - 1, _currentLine - 1] == 1)
                 {
+                    Ruby.OnResetRubies();
                     _improvedSpreadEnabled = false;
                 }
             }
@@ -415,7 +406,7 @@ namespace Grid
             {
                 if (difference > 0) // moving right 
                 {
-                    for (int x = 1; x < Width - 1; x++)
+                    for (int x = 0; x < Width - 1; x++)
                     {
                         if (_grid[x + 1, y] != 1) continue;
 
